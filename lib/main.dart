@@ -1,13 +1,31 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_get_alkitab_json/book-model.dart';
 import 'package:flutter_get_alkitab_json/book-services.dart';
+import 'package:flutter_get_alkitab_json/catatanpage.dart';
 import 'package:flutter_get_alkitab_json/data_services.dart';
 import 'package:flutter_get_alkitab_json/dataclass.dart';
+import 'package:flutter_get_alkitab_json/editprofile.dart';
+import 'package:flutter_get_alkitab_json/homepage.dart';
+import 'package:flutter_get_alkitab_json/listalkitab.dart';
+import 'package:flutter_get_alkitab_json/listcatatan.dart';
+import 'package:flutter_get_alkitab_json/listrenungan.dart';
+import 'package:flutter_get_alkitab_json/logininput.dart';
+import 'package:flutter_get_alkitab_json/loginpage.dart';
+import 'package:flutter_get_alkitab_json/mergeayat.dart';
+import 'package:flutter_get_alkitab_json/profile.dart';
+import 'package:flutter_get_alkitab_json/register.dart';
+import 'package:flutter_get_alkitab_json/renunganpage.dart';
+import 'package:flutter_get_alkitab_json/searchalkitab.dart';
 
 void main() {
-  runApp(const MaterialApp(title: "Coba Alkitab JSON", home: MyApp(),));
+  runApp(const MaterialApp(
+    title: "Widget Aplikasi Sementara",
+    debugShowCheckedModeBanner: false, 
+    home: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -18,39 +36,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int pasal = 0;
-  List indexPerikop = [];
-  List<Widget> tilesAyat = [];
-
-  // SERVICES 
-  Future<void> loadAlkitabfromJSON() async {
-    final String response = 
-        await DefaultAssetBundle.of(context).loadString("assets/Alkitab.json");
-    final dataAlkitab = await json.decode(response);
-    setState(() {
-      int startIndexAyat = 0;
-      for (int i = 0; i < dataAlkitab.length; i++) {
-        
-      }
-    });
-  }
-  // END OF SERVICES
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Coba Alkitab JSON"),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            
-          ],
-        ),
-      ),
+      body: MergeAyat(),
     );
   }
 }
