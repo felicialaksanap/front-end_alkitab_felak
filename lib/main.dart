@@ -23,7 +23,7 @@ import 'package:flutter_get_alkitab_json/searchalkitab.dart';
 void main() {
   runApp(const MaterialApp(
     title: "Widget Aplikasi Sementara",
-    debugShowCheckedModeBanner: false, 
+    debugShowCheckedModeBanner: false,
     home: MyApp(),
   ));
 }
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: MergeAyat(),
+      body: LoginPage(),
     );
   }
 }

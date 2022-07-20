@@ -37,14 +37,21 @@ class _MergeAyatState extends State<MergeAyat> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
-                  children: const [
-                    Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      ),
                     )
                   ],
                 ),
-                const SizedBox(width: 10,),
+                const SizedBox(
+                  width: 10,
+                ),
                 Expanded(
                   child: Container(
                     padding: EdgeInsets.only(left: 16, right: 16),
@@ -52,7 +59,7 @@ class _MergeAyatState extends State<MergeAyat> {
                     // child: GridView.builder(
                     //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     //     crossAxisCount: 2,
-                    //   ), 
+                    //   ),
                     //   itemCount: 4,
                     //   itemBuilder: (context, index) {
                     //     return Text("index $index");

@@ -18,14 +18,23 @@ class _SearchAlkitabState extends State<SearchAlkitab> {
         automaticallyImplyLeading: false,
         backgroundColor: Color.fromARGB(255, 140, 101, 58),
         elevation: 0,
-        leading: const Padding(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
+        title: const Padding(
           padding: EdgeInsets.fromLTRB(16, 4, 4, 10),
           child: TextField(
             cursorColor: Colors.white,
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: "Allah", 
+              hintText: "Allah",
             ),
           ),
         ),
@@ -33,11 +42,11 @@ class _SearchAlkitabState extends State<SearchAlkitab> {
           Padding(
             padding: EdgeInsets.only(right: 16),
             child: IconButton(
-              onPressed: () {}, 
+              onPressed: () {},
               icon: Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
+                Icons.search,
+                color: Colors.white,
+              ),
             ),
           ),
         ],
