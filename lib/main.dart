@@ -19,6 +19,7 @@ import 'package:flutter_get_alkitab_json/profile.dart';
 import 'package:flutter_get_alkitab_json/register.dart';
 import 'package:flutter_get_alkitab_json/renunganpage.dart';
 import 'package:flutter_get_alkitab_json/searchalkitab.dart';
+import 'package:flutter_get_alkitab_json/splashscreen.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -39,7 +40,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LoginPage(),
+      body: SplashScreen(),
     );
   }
 }
