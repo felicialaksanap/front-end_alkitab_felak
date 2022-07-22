@@ -28,7 +28,7 @@ class _SearchAlkitabState extends State<SearchAlkitab> {
           ),
         ),
         title: const Padding(
-          padding: EdgeInsets.fromLTRB(16, 4, 4, 10),
+          padding: EdgeInsets.fromLTRB(0, 10, 4, 10),
           child: TextField(
             cursorColor: Colors.white,
             style: TextStyle(color: Colors.white),

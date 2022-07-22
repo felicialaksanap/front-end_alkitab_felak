@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_get_alkitab_json/listalkitab.dart';
+import 'package:flutter_get_alkitab_json/listalkitabtemp.dart';
 import 'package:flutter_get_alkitab_json/listcatatan.dart';
 import 'package:flutter_get_alkitab_json/listrenungan.dart';
 import 'package:flutter_get_alkitab_json/loginpage.dart';
@@ -22,7 +23,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: Color.fromARGB(255, 140, 101, 58),
         elevation: 0,
         title: TextButton(
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => ListAlkitab()));
           },
-          child: Text("Kejadian 2",
+          child: Text("Kejadian 1",
               style: GoogleFonts.nunito(
                   textStyle: const TextStyle(
                       fontSize: 20,
@@ -38,7 +38,25 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white))),
         ),
       ),
-      endDrawer: Drawer(
+      body: Container(
+        padding: EdgeInsets.all(16),
+        child: ListView.builder(
+          itemCount: dataAlkitabTemp.isiAlkitab.length,
+          itemBuilder: (context, index) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  dataAlkitabTemp.isiAlkitab[index].alkitab,
+                  style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 95, 95, 95))),
+                ),
+                const SizedBox(height: 10,),
+              ],
+            );
+          }
+        ),
+      ),
+      drawer: Drawer(
         child: Column(
           children: [
             Expanded(
@@ -61,19 +79,19 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 20,),
                   ListTile(
                     leading: Container(
-                        width: 25,
-                        height: 25,
-                        child: Image.asset('assets/images/person_icon.png')),
-                    // Icon(
-                    //   Icons.account_circle_outlined,
-                    //   color: Color.fromARGB(255, 140, 101, 58)),
+                        width: 40,
+                        height: 40,
+                        child: 
+                        Image.asset('assets/images/person_icon.png'),
+                    ),
                     title: Text(
                       "Profile",
                       style: GoogleFonts.roboto(
                           textStyle: const TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               color: Color.fromARGB(255, 140, 101, 58))),
                     ),
                     onTap: () {
@@ -81,14 +99,18 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(builder: (context) => LoginPage()));
                     },
                   ),
+                  const SizedBox(height: 10,),
                   ListTile(
-                    leading: const Icon(Icons.add_circle_outline,
-                        color: Color.fromARGB(255, 140, 101, 58)),
+                    leading:Container(
+                      width: 40,
+                      height: 40,
+                      child: Image.asset("assets/images/add_icon.png"),
+                    ),
                     title: Text(
                       "Gabungin Ayat",
                       style: GoogleFonts.roboto(
                           textStyle: const TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               color: Color.fromARGB(255, 140, 101, 58))),
                     ),
                     onTap: () {
@@ -96,14 +118,18 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(builder: (context) => MergeAyat()));
                     },
                   ),
+                  const SizedBox(height: 10,),
                   ListTile(
-                    leading: const Icon(Icons.assignment_outlined,
-                        color: Color.fromARGB(255, 140, 101, 58)),
+                    leading: Container(
+                      width: 40,
+                      height: 40,
+                      child: Image.asset("assets/images/catatan_icon.png"),
+                    ),
                     title: Text(
                       "Catatan",
                       style: GoogleFonts.roboto(
                           textStyle: const TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               color: Color.fromARGB(255, 140, 101, 58))),
                     ),
                     onTap: () {
@@ -113,14 +139,19 @@ class _HomePageState extends State<HomePage> {
                               builder: (context) => ListCatatan()));
                     },
                   ),
+                  const SizedBox(height: 10,),
                   ListTile(
-                    leading: const Icon(Icons.book,
-                        color: Color.fromARGB(255, 140, 101, 58)),
+                    leading: Container(
+                      width: 40,
+                      height: 40,
+                      child: 
+                      Image.asset("assets/images/alkitab_icon.png"),
+                    ),
                     title: Text(
                       "Renungan",
                       style: GoogleFonts.roboto(
                           textStyle: const TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               color: Color.fromARGB(255, 140, 101, 58))),
                     ),
                     onTap: () {
@@ -130,14 +161,18 @@ class _HomePageState extends State<HomePage> {
                               builder: (context) => ListRenungan()));
                     },
                   ),
+                  const SizedBox(height: 10,),
                   ListTile(
-                    leading: const Icon(Icons.search,
-                        color: Color.fromARGB(255, 140, 101, 58)),
+                    leading: Container(
+                      width: 40,
+                      height: 40,
+                      child: Image.asset("assets/images/search_icon.png"),
+                    ),
                     title: Text(
                       "Search",
                       style: GoogleFonts.roboto(
                           textStyle: const TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               color: Color.fromARGB(255, 140, 101, 58))),
                     ),
                     onTap: () {
@@ -153,6 +188,133 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      // endDrawer: Drawer(
+      //   child: Column(
+      //     children: [
+      //       Expanded(
+      //         child: ListView(
+      //           children: <Widget>[
+      //             Container(
+      //               height: 55,
+      //               color: const Color.fromARGB(255, 140, 101, 58),
+      //               child: Row(
+      //                 mainAxisAlignment: MainAxisAlignment.end,
+      //                 children: [
+      //                   IconButton(
+      //                       onPressed: () {
+      //                         Navigator.of(context).pop();
+      //                       },
+      //                       icon: Icon(
+      //                         Icons.clear,
+      //                         color: Colors.white,
+      //                       ))
+      //                 ],
+      //               ),
+      //             ),
+      //             ListTile(
+      //               leading: Container(
+      //                   width: 40,
+      //                   height: 40,
+      //                   child: 
+      //                   Image.asset('assets/images/person_icon.png'),
+      //               ),
+      //               title: Text(
+      //                 "Profile",
+      //                 style: GoogleFonts.roboto(
+      //                     textStyle: const TextStyle(
+      //                         fontSize: 16,
+      //                         color: Color.fromARGB(255, 140, 101, 58))),
+      //               ),
+      //               onTap: () {
+      //                 Navigator.push(context,
+      //                     MaterialPageRoute(builder: (context) => LoginPage()));
+      //               },
+      //             ),
+      //             ListTile(
+      //               leading:Container(
+      //                 width: 40,
+      //                 height: 40,
+      //                 child: Image.asset("assets/images/add_icon.png"),
+      //               ),
+      //               title: Text(
+      //                 "Gabungin Ayat",
+      //                 style: GoogleFonts.roboto(
+      //                     textStyle: const TextStyle(
+      //                         fontSize: 16,
+      //                         color: Color.fromARGB(255, 140, 101, 58))),
+      //               ),
+      //               onTap: () {
+      //                 Navigator.push(context,
+      //                     MaterialPageRoute(builder: (context) => MergeAyat()));
+      //               },
+      //             ),
+      //             ListTile(
+      //               leading: Container(
+      //                 width: 40,
+      //                 height: 40,
+      //                 child: Image.asset("assets/images/catatan_icon.png"),
+      //               ),
+      //               title: Text(
+      //                 "Catatan",
+      //                 style: GoogleFonts.roboto(
+      //                     textStyle: const TextStyle(
+      //                         fontSize: 16,
+      //                         color: Color.fromARGB(255, 140, 101, 58))),
+      //               ),
+      //               onTap: () {
+      //                 Navigator.push(
+      //                     context,
+      //                     MaterialPageRoute(
+      //                         builder: (context) => ListCatatan()));
+      //               },
+      //             ),
+      //             ListTile(
+      //               leading: Container(
+      //                 width: 40,
+      //                 height: 40,
+      //                 child: 
+      //                 Image.asset("assets/images/alkitab_icon.png"),
+      //               ),
+      //               title: Text(
+      //                 "Renungan",
+      //                 style: GoogleFonts.roboto(
+      //                     textStyle: const TextStyle(
+      //                         fontSize: 16,
+      //                         color: Color.fromARGB(255, 140, 101, 58))),
+      //               ),
+      //               onTap: () {
+      //                 Navigator.push(
+      //                     context,
+      //                     MaterialPageRoute(
+      //                         builder: (context) => ListRenungan()));
+      //               },
+      //             ),
+      //             ListTile(
+      //               leading: Container(
+      //                 width: 40,
+      //                 height: 40,
+      //                 child: Image.asset("assets/images/search_icon.png"),
+      //               ),
+      //               title: Text(
+      //                 "Search",
+      //                 style: GoogleFonts.roboto(
+      //                     textStyle: const TextStyle(
+      //                         fontSize: 16,
+      //                         color: Color.fromARGB(255, 140, 101, 58))),
+      //               ),
+      //               onTap: () {
+      //                 Navigator.push(
+      //                     context,
+      //                     MaterialPageRoute(
+      //                         builder: (context) => SearchAlkitab()));
+      //               },
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

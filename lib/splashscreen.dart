@@ -27,30 +27,38 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 200,
-              height: 200,
-              child: Image.asset('assets/images/logo.png'),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "DUARRRR",
-              style: GoogleFonts.nunito(
-                textStyle: const TextStyle(
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 200,
+                height: 200,
+                child: Image.asset('assets/images/logo.png'),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "DUARRRR",
+                style: GoogleFonts.nunito(
+                  textStyle: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 85, 48, 29)),
+                    color: Color.fromARGB(255, 85, 48, 29)
+                  ),
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 30,),
+              CircularProgressIndicator(
+                color: Color.fromARGB(255, 85, 48, 29),
+                strokeWidth: 6,
+                
+              ),
+            ],
+          ),
         ),
       ),
     );

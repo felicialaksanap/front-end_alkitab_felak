@@ -31,7 +31,7 @@ class _MergeAyatState extends State<MergeAyat> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            color: Color.fromARGB(255, 85, 48, 29),
+            color: Color.fromARGB(255, 140, 101, 58),
             padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
