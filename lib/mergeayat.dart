@@ -13,10 +13,11 @@ class MergeAyat extends StatefulWidget {
 }
 
 class _MergeAyatState extends State<MergeAyat> {
-  List items = List.generate(10, (index) => "Matius 2");
+  List items = [];
   List searchitems = [];
 
-  int currentIndex = 0;
+  double width = 20.0;
+  double height = 7.0;
 
   @override
   void initState() {
@@ -30,203 +31,132 @@ class _MergeAyatState extends State<MergeAyat> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            color: Color.fromARGB(255, 140, 101, 58),
-            padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
+          Row(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                color: const Color.fromARGB(255, 140, 101, 58),
+                padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+                child: Row (
                   children: [
                     IconButton(
                       onPressed: () {
                         Navigator.pop(context);
-                      },
+                      }, 
                       icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(left: 16, right: 16),
-                    color: Colors.white,
-                    // child: GridView.builder(
-                    //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    //     crossAxisCount: 2,
-                    //   ),
-                    //   itemCount: 4,
-                    //   itemBuilder: (context, index) {
-                    //     return Text("index $index");
-                    //   }
-                    // ),
-                    // child: GridView.builder(
-                    //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    //     crossAxisCount: 2,
-                    //     // childAspectRatio: 0.75,
-                    //     crossAxisSpacing: 10,
-                    //     mainAxisSpacing: 10,
-                    //   ),
-                    //   itemCount: searchitems.length,
-                    //   itemBuilder: (BuildContext context, int index) {
-                    //     return Container(
-                    //       padding: EdgeInsets.fromLTRB(16, 4, 4, 0),
-                    //       decoration: BoxDecoration(
-                    //         borderRadius: BorderRadius.circular(50),
-                    //         color: Color.fromARGB(255, 233, 224, 215),
-                    //       ),
-                    //       child: Row(
-                    //         children: [
-                    //           Text(searchitems[index]),
-                    //           IconButton(
-                    //             onPressed: () {
-                    //               setState(() {
-                    //                 searchitems.removeAt(index);
-                    //               });
-                    //             },
-                    //             icon: Icon(Icons.cancel_outlined)
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     );
-                    //   }
-                    // ),
-                  ),
-                ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              searchitems.add("Matius 2");
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.add_circle_outline,
-                            color: Colors.white,
+                      )
+                    ),
+
+                    Expanded(
+                      child: Container(
+                        // padding: const EdgeInsets.only(left: 4,right: ),
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: width / height,
                           ),
+                          itemCount: items.length, 
+                          itemBuilder: (context, index) {
+                            return Container(
+                              padding: const EdgeInsets.fromLTRB(5, 4, 0, 0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: const Color.fromARGB(255, 233, 224, 215),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(items[index]),
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        items.removeAt(index);
+                                      });
+                                    }, 
+                                    icon: const Icon(Icons.cancel_outlined)
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
                         ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.search,
-                              color: Colors.white,
-                            )),
-                      ],
+                      ),
+                    ),
+
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          if (items.length < 5) {
+                            items.add("Matius 2:1");
+                          } else if (items.length == 5) {
+                            items.add("...");
+                          }
+                          searchitems.add("Matius 2:1");
+                        });
+                      }, 
+                      icon: const Icon(
+                        Icons.add_circle_outline,
+                        color: Colors.white,
+                      )
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Padding(
+
+          Container(
             padding: const EdgeInsets.only(left: 16, top: 8),
             child: Text(
               "Riwayat",
               style: GoogleFonts.nunito(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                       fontSize: 18, color: Color.fromARGB(255, 85, 48, 29))),
             ),
           ),
+
           Container(
             height: 60,
-            padding: EdgeInsets.only(left: 16),
+            padding: const EdgeInsets.only(left: 16),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: searchitems.length,
               itemBuilder: (context, index) {
                 return Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: EdgeInsets.fromLTRB(16, 4, 4, 0),
+                      padding: const EdgeInsets.fromLTRB(28, 4, 4, 0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        color: Color.fromARGB(255, 233, 224, 215),
+                        color: const Color.fromARGB(255, 233, 224, 215),
                       ),
                       child: Row(
                         children: [
-                          Text(items[index]),
+                          Text(searchitems[index]),
+                          const SizedBox(width: 20,),
                           IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.cancel_outlined)),
+                            onPressed: () {
+                              setState(() {
+                                searchitems.removeAt(index);
+                              });
+                            }, 
+                            icon: const Icon(Icons.cancel_outlined)
+                          ),
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      width: 20,
-                    ),
+                    const SizedBox(width: 10,),
                   ],
                 );
-              },
+              }
             ),
-          ),
-          // Expanded(
-          //   child: Container(
-          //     padding: EdgeInsets.only(left: 16, right: 16),
-          //     child: GridView.builder(
-          //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          //         crossAxisCount: 2,
-          //         // childAspectRatio: 0.75,
-          //         crossAxisSpacing: 10,
-          //         mainAxisSpacing: 10,
-          //       ),
-          //       itemCount: searchitems.length,
-          //       itemBuilder: (BuildContext context, int index) {
-          //         return Container(
-          //           padding: EdgeInsets.fromLTRB(16, 4, 4, 0),
-          //           decoration: BoxDecoration(
-          //             borderRadius: BorderRadius.circular(50),
-          //             color: Color.fromARGB(255, 233, 224, 215),
-          //           ),
-          //           child: Row(
-          //             children: [
-          //               Text(searchitems[index]),
-          //               IconButton(
-          //                 onPressed: () {
-          //                   setState(() {
-          //                     searchitems.removeAt(index);
-          //                   });
-          //                 },
-          //                 icon: Icon(Icons.cancel_outlined)
-          //               ),
-          //             ],
-          //           ),
-          //         );
-          //       }
-          //     ),
-          //   ),
-          // ),
+          )
         ],
       ),
     );
   }
-
-  // Widget _cardRiwayat() {
-  //   return Container(
-  //     padding: EdgeInsets.fromLTRB(16, 4, 4, 0),
-  //     decoration: BoxDecoration(
-  //       borderRadius: BorderRadius.circular(50),
-  //       color: Color.fromARGB(255, 233, 224, 215),
-  //     ),
-  //     child: Row(
-  //       children: [
-  //         Text("Matius 2"),
-  //         IconButton(
-  //             onPressed: () {
-  //               // deleteRiwayat(ind)
-  //               // riwayatPencarian.removeAt(index);
-  //             },
-  //             icon: Icon(Icons.cancel_outlined)),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

@@ -12,7 +12,8 @@ import 'package:flutter_get_alkitab_json/searchalkitab.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final bool statusLogin;
+  const HomePage({super.key, required this.statusLogin});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     height: 55,
                     color: const Color.fromARGB(255, 140, 101, 58),
-                    child: Row(
+                    child: Row(  // close
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         IconButton(
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const SizedBox(height: 20,),
-                  ListTile(
+                  ListTile( // profile
                     leading: Container(
                         width: 40,
                         height: 40,
@@ -95,8 +96,15 @@ class _HomePageState extends State<HomePage> {
                               color: Color.fromARGB(255, 140, 101, 58))),
                     ),
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginPage()));
+                      if (widget.statusLogin == false) {
+                        Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => LoginPage())
+                        );
+                      } else if (widget.statusLogin == true) {
+                        Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => ProfilePage())
+                        );
+                      }
                     },
                   ),
                   const SizedBox(height: 10,),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_get_alkitab_json/editprofile.dart';
+import 'package:flutter_get_alkitab_json/homepage.dart';
 import 'package:flutter_get_alkitab_json/loginpage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -30,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
           onPressed: () {
             Navigator.push(
               context, 
-              MaterialPageRoute(builder: (context) => LoginPage())
+              MaterialPageRoute(builder: (context) => HomePage(statusLogin: false))
             );
           },
           icon: const Icon(Icons.power_settings_new_rounded),
@@ -47,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const[
+              children: [
                 Icon(
                   Icons.account_circle_outlined,
                   color: Color.fromARGB(255, 140, 101, 58),

@@ -153,7 +153,7 @@ class _LoginInputState extends State<LoginInput> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()));
+                                  builder: (context) => HomePage(statusLogin: true)));
                         },
                         style: ElevatedButton.styleFrom(
                           primary: Color.fromARGB(255, 140, 101, 58),

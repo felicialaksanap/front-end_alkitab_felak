@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   _navigatehome() async {
     await Future.delayed(Duration(milliseconds: 5000), () {});
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
+        context, MaterialPageRoute(builder: (context) => HomePage(statusLogin: false)));
   }
 
   @override
@@ -55,7 +55,6 @@ class _SplashScreenState extends State<SplashScreen> {
               CircularProgressIndicator(
                 color: Color.fromARGB(255, 85, 48, 29),
                 strokeWidth: 6,
-                
               ),
             ],
           ),
