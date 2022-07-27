@@ -11,20 +11,37 @@ class SearchAlkitab extends StatefulWidget {
 }
 
 class _SearchAlkitabState extends State<SearchAlkitab> {
-  List ayat = List.generate(5, (i) => List.generate(2, (j) => ""));
+  List ayat = List.generate(10, (i) => List.generate(2, (j) => ""));
 
   @override
   void initState() {
     super.initState();
-    for (int i = 0; i < 5; i++) {
+    generateListAlkitab();
+    viewListAyat();
+  }
+
+  @override
+  void generateListAlkitab() {
+    for (int i = 0; i < 10; i++) {
       for (int j = 0; j < 2; j++) {
         if (j == 0) {
           ayat[i][j] = "Kejadian 1:1";
         } else {
           ayat[i][j] =
-              "1. Lorem ipsum dolor sit amet, consectetur adispiscing elit." +
-                  " Aenean id arcu ut quisque id faucibus tempus, bibendum. Adispiscing dui proinlacus.";
+            "1. Lorem ipsum dolor sit amet, consectetur adispiscing elit." +
+            " Aenean id arcu ut quisque id faucibus tempus, bibendum. Adispiscing dui proinlacus.";
         }
+      }
+    }
+  }
+
+  @override
+  void viewListAyat () {
+    for (int i = 0; i < 5; i++) {
+      for (int j = 0; j < 2; j++) {
+        print(ayat[i][j]);
+        print("\n");
+        print(ayat[i][j]);
       }
     }
   }
@@ -69,58 +86,38 @@ class _SearchAlkitabState extends State<SearchAlkitab> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            padding: const EdgeInsets.fromLTRB(16, 12, 0, 0),
-            color: const Color.fromARGB(255, 233, 224, 215),
-            child: ListView.builder(
-                itemCount: ayat.length,
-                itemBuilder: (context, index) {
-                  return Container(
+      body: Container(
+          child: ListView.builder(
+            itemCount: ayat.length,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.fromLTRB(16, 12, 0, 12),
+                    color: const Color.fromARGB(255, 233, 224, 215),
                     child: Text(
                       ayat[index][0],
                       style: GoogleFonts.nunito(
                         textStyle: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
+                          fontSize: 18, fontWeight: FontWeight.w500),
                       ),
                     ),
-                  );
-                }),
-            // Text(
-            //   "Kejadian 1 : 1",
-            //   style: GoogleFonts.nunito(
-            //       textStyle: const TextStyle(
-            //           fontSize: 18, fontWeight: FontWeight.w500)),
-            // ),
-          ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: ListView.builder(
-                itemCount: ayat.length,
-                itemBuilder: (context, index) {
-                  return Container(
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(16, 12, 0, 12),
                     child: Text(
                       ayat[index][1],
                       style: GoogleFonts.nunito(
                         textStyle: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
-                      ),
+                          fontSize: 18, fontWeight: FontWeight.w500)),
                     ),
-                  );
-                }),
-            // Text(
-            //   "1. Lorem ipsum dolor sit amet, consectetur adispiscing elit." +
-            //       " Aenean id arcu ut quisque id faucibus tempus, bibendum. Adispiscing dui proinlacus.",
-            //   style: GoogleFonts.nunito(
-            //       textStyle: TextStyle(
-            //           fontSize: 18, color: Color.fromARGB(255, 95, 95, 95))),
-            // ),
-          ),
-        ],
-      ),
+                  )
+                ],
+              );
+            }
+          )
+        ),
     );
   }
 }

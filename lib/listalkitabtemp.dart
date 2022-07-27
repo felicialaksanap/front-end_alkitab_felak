@@ -51,3 +51,57 @@ class dataAlkitabTemp {
     ),
   ];
 }
+
+class dataNamaKitab {
+  String namaKitab;
+
+  dataNamaKitab(this.namaKitab) ;
+  static List<dataAlkitabTemp> isiNamaKitab = [
+    dataAlkitabTemp("Kej"),
+    dataAlkitabTemp("Kel"),
+    dataAlkitabTemp("Ima"),
+    dataAlkitabTemp("Bil"),
+    dataAlkitabTemp("Ula"),
+    dataAlkitabTemp("Yos"),
+    dataAlkitabTemp("Hak"),
+    dataAlkitabTemp("Rut"),
+    dataAlkitabTemp("1 Sam"),
+    dataAlkitabTemp("2 Sam"),
+    dataAlkitabTemp("1 Raja"),
+    dataAlkitabTemp("2 Raja"),
+    dataAlkitabTemp("1 Taw"),
+    dataAlkitabTemp("2 Taw"),
+    dataAlkitabTemp("Ezr"),
+    dataAlkitabTemp("Neh"),
+    dataAlkitabTemp("Est"),
+    dataAlkitabTemp("Ayb"),
+    dataAlkitabTemp("Mz"),
+    dataAlkitabTemp("Ams"),
+    dataAlkitabTemp("Peng"),
+    dataAlkitabTemp("Kid"),
+    dataAlkitabTemp("Yes"),
+    dataAlkitabTemp("Yer"),
+    dataAlkitabTemp("Rat"),
+    dataAlkitabTemp("Yeh"),
+    dataAlkitabTemp("Dan"),
+    dataAlkitabTemp("Hos"),
+    dataAlkitabTemp("Yoel"),
+    dataAlkitabTemp("Amos"),
+    dataAlkitabTemp("Mat"),
+    dataAlkitabTemp("Mar"),
+    dataAlkitabTemp("Luk"),
+    dataAlkitabTemp("Yoh"),
+    dataAlkitabTemp("Kis"),
+    dataAlkitabTemp("Rom"),
+    dataAlkitabTemp("Kor"),
+    dataAlkitabTemp("Gal"),
+    dataAlkitabTemp("Efe"),
+    dataAlkitabTemp("Fil"),
+    dataAlkitabTemp("Kol"),
+    dataAlkitabTemp("1 Tes"),
+    dataAlkitabTemp("2 Tes"),
+    dataAlkitabTemp("1 Tim"),
+    dataAlkitabTemp("2 Tim"),
+  ];
+
+}

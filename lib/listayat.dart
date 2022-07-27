@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_get_alkitab_json/listalkitabtemp.dart';
-import 'package:flutter_get_alkitab_json/listpasal.dart';
+import 'package:flutter_get_alkitab_json/homepage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ListAlkitab extends StatefulWidget {
-  const ListAlkitab({super.key});
+class ListAyat extends StatefulWidget {
+  const ListAyat({super.key});
 
   @override
-  State<ListAlkitab> createState() => _ListAlkitabState();
+  State<ListAyat> createState() => _ListAyatState();
 }
 
-class _ListAlkitabState extends State<ListAlkitab> {
+class _ListAyatState extends State<ListAyat> {
+  List ayat = List.generate(30, (index) => "$index");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +31,7 @@ class _ListAlkitabState extends State<ListAlkitab> {
           ),
         ),
         title: Text(
-          "Alkitab", 
+          "Ayat", 
           style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white))
         ),
       ),
@@ -42,7 +43,7 @@ class _ListAlkitabState extends State<ListAlkitab> {
             crossAxisSpacing: 5,
             mainAxisSpacing: 5,
           ), 
-          itemCount: dataNamaKitab.isiNamaKitab.length,
+          itemCount: ayat.length,
           itemBuilder: (context, index) {
             return Container(
               padding: const EdgeInsets.all(16),
@@ -57,10 +58,10 @@ class _ListAlkitabState extends State<ListAlkitab> {
                     onPressed: () {
                       Navigator.push(
                         context, 
-                        MaterialPageRoute(builder: (context) => ListPasal())
+                        MaterialPageRoute(builder: (context) => HomePage(statusLogin: false,))
                       );
                     }, 
-                    child: Text(dataNamaKitab.isiNamaKitab[index].alkitab),
+                    child: Text(ayat[index]),
                   ),
                 ],
               ),
