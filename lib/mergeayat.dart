@@ -19,6 +19,7 @@ class _MergeAyatState extends State<MergeAyat> {
 
   double width = 20.0;
   double height = 7.0;
+  bool valuevisible = false;
 
   @override
   void initState() {
@@ -196,21 +197,36 @@ class _MergeAyatState extends State<MergeAyat> {
                         width: MediaQuery.of(context).size.width,
                         padding: const EdgeInsets.fromLTRB(16, 12, 0, 12),
                         color: const Color.fromARGB(255, 233, 224, 215),
-                        child: Text(
-                          ayat[index][0],
-                          style: GoogleFonts.nunito(
-                            textStyle: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
-                          ),
+                        child: Row(
+                          children: [
+                            Text(
+                              ayat[index][0],
+                              style: GoogleFonts.nunito(
+                                textStyle: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  valuevisible = !valuevisible;
+                                });
+                              }, 
+                              icon: Icon(Icons.search),
+                            ),
+                          ],
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.fromLTRB(16, 12, 0, 12),
-                        child: Text(
-                          ayat[index][1],
-                          style: GoogleFonts.nunito(
-                            textStyle: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500)),
+                        child: Visibility(
+                          child: Text(
+                            ayat[index][1],
+                            style: GoogleFonts.nunito(
+                              textStyle: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w500)),
+                          ),
+                          visible: valuevisible,
                         ),
                       )
                     ],

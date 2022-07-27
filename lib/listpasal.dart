@@ -41,15 +41,13 @@ class _ListPasalState extends State<ListPasal> {
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 5, 
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20,
           ), 
           itemCount: pasal.length,
           itemBuilder: (context, index) {
             return Container(
-              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
                 color: Color.fromARGB(255, 233, 224, 215)
               ),
               child: Row(

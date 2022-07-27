@@ -35,39 +35,37 @@ class _ListAlkitabState extends State<ListAlkitab> {
         ),
       ),
       body: Container (
-        padding: const EdgeInsets.all(8),
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5, 
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
-          ), 
-          itemCount: dataNamaKitab.isiNamaKitab.length,
-          itemBuilder: (context, index) {
-            return Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Color.fromARGB(255, 233, 224, 215)
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context, 
-                        MaterialPageRoute(builder: (context) => ListPasal())
-                      );
-                    }, 
-                    child: Text(dataNamaKitab.isiNamaKitab[index].alkitab),
-                  ),
-                ],
-              ),
-            );
-          },
+          padding: const EdgeInsets.all(8),
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 5, 
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+            ), 
+            itemCount: dataNamaKitab.isiNamaKitab.length,
+            itemBuilder: (context, index) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 233, 224, 215)
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => ListPasal())
+                        );
+                      }, 
+                      child: Text(dataNamaKitab.isiNamaKitab[index].alkitab),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
-      ),
     );
   }
 }
