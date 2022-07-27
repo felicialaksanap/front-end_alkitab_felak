@@ -11,6 +11,23 @@ class SearchAlkitab extends StatefulWidget {
 }
 
 class _SearchAlkitabState extends State<SearchAlkitab> {
+  List ayat = List.generate(5, (i) => List.generate(2, (j) => ""));
+
+  @override
+  void initState() {
+    super.initState();
+    for (int i = 0; i < 5; i++) {
+      for (int j = 0; j < 2; j++) {
+        if (j == 0) {
+          ayat[i][j] = "Kejadian 1:1";
+        } else {
+          ayat[i][j] =
+              "1. Lorem ipsum dolor sit amet, consectetur adispiscing elit." +
+                  " Aenean id arcu ut quisque id faucibus tempus, bibendum. Adispiscing dui proinlacus.";
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,26 +69,56 @@ class _SearchAlkitabState extends State<SearchAlkitab> {
           ),
         ],
       ),
-      body: Column (
+      body: Column(
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
             height: 50,
             padding: const EdgeInsets.fromLTRB(16, 12, 0, 0),
             color: const Color.fromARGB(255, 233, 224, 215),
-            child: Text(
-              "Kejadian 1 : 1",
-              style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-            ),
+            child: ListView.builder(
+                itemCount: ayat.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    child: Text(
+                      ayat[index][0],
+                      style: GoogleFonts.nunito(
+                        textStyle: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  );
+                }),
+            // Text(
+            //   "Kejadian 1 : 1",
+            //   style: GoogleFonts.nunito(
+            //       textStyle: const TextStyle(
+            //           fontSize: 18, fontWeight: FontWeight.w500)),
+            // ),
           ),
           Container(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              "1. Lorem ipsum dolor sit amet, consectetur adispiscing elit." +
-              " Aenean id arcu ut quisque id faucibus tempus, bibendum. Adispiscing dui proinlacus.",
-              style: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, color: Color.fromARGB(255, 95, 95, 95))),
-            ),
-          )
+            child: ListView.builder(
+                itemCount: ayat.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    child: Text(
+                      ayat[index][1],
+                      style: GoogleFonts.nunito(
+                        textStyle: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  );
+                }),
+            // Text(
+            //   "1. Lorem ipsum dolor sit amet, consectetur adispiscing elit." +
+            //       " Aenean id arcu ut quisque id faucibus tempus, bibendum. Adispiscing dui proinlacus.",
+            //   style: GoogleFonts.nunito(
+            //       textStyle: TextStyle(
+            //           fontSize: 18, color: Color.fromARGB(255, 95, 95, 95))),
+            // ),
+          ),
         ],
       ),
     );
