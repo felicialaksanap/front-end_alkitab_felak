@@ -13,13 +13,14 @@ class MergeAyat extends StatefulWidget {
 }
 
 class _MergeAyatState extends State<MergeAyat> {
-  List ayat = List.generate(10, (i) => List.generate(2, (j) => ""));
+  List ayat = List.generate(10, (i) => List.generate(3, (j) => ""));
   List items = [];
   List searchitems = [];
 
   double width = 20.0;
   double height = 7.0;
   bool valuevisible = false;
+  // String image_path = 'assets/images/polygon_down.png';
 
   @override
   void initState() {
@@ -32,13 +33,15 @@ class _MergeAyatState extends State<MergeAyat> {
   @override
   void generateListAlkitab() {
     for (int i = 0; i < 10; i++) {
-      for (int j = 0; j < 2; j++) {
+      for (int j = 0; j < 3; j++) {
         if (j == 0) {
           ayat[i][j] = "Kejadian 1:1";
-        } else {
+        } else if (j == 1) {
           ayat[i][j] =
             "1. Lorem ipsum dolor sit amet, consectetur adispiscing elit." +
             " Aenean id arcu ut quisque id faucibus tempus, bibendum. Adispiscing dui proinlacus.";
+        } else {
+          ayat[i][j] = "false";
         }
       }
     }
@@ -46,8 +49,10 @@ class _MergeAyatState extends State<MergeAyat> {
 
   @override
   void viewListAyat () {
-    for (int i = 0; i < 5; i++) {
-      for (int j = 0; j < 2; j++) {
+    for (int i = 0; i < 10; i++) {
+      for (int j = 0; j < 3; j++) {
+        print(ayat[i][j]);
+        print("\n");
         print(ayat[i][j]);
         print("\n");
         print(ayat[i][j]);
@@ -86,14 +91,14 @@ class _MergeAyatState extends State<MergeAyat> {
                           shrinkWrap: true,
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            crossAxisSpacing: 5,
+                            // crossAxisSpacing: 1,
                             mainAxisSpacing: 10,
                             childAspectRatio: width / height,
                           ),
                           itemCount: items.length, 
                           itemBuilder: (context, index) {
                             return Container(
-                              padding: const EdgeInsets.fromLTRB(5, 4, 0, 0),
+                              padding: const EdgeInsets.fromLTRB(6, 4, 2, 0),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
                                 color: const Color.fromARGB(255, 233, 224, 215),
@@ -206,27 +211,44 @@ class _MergeAyatState extends State<MergeAyat> {
                                   fontSize: 18, fontWeight: FontWeight.w500),
                               ),
                             ),
-                            IconButton(
+                            TextButton(
                               onPressed: () {
                                 setState(() {
-                                  valuevisible = !valuevisible;
+                                  if (ayat[index][2] == "false") {
+                                    ayat[index][2] = "true";
+                                  } else if (ayat[index][2] == "true") {
+                                    ayat[index][2] = "false";
+                                  }
                                 });
                               }, 
-                              icon: Icon(Icons.search),
+                              child: (ayat[index][2] == "true") 
+                              ? Image.asset('assets/images/polygon_up.png')
+                              : Image.asset('assets/images/polygon_down.png')
+
                             ),
                           ],
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.fromLTRB(16, 12, 0, 12),
-                        child: Visibility(
+                        child: (ayat[index][2] == "true")
+                        ? Visibility(
                           child: Text(
                             ayat[index][1],
                             style: GoogleFonts.nunito(
                               textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w500)),
                           ),
-                          visible: valuevisible,
+                          visible: true,
+                        )
+                        : Visibility(
+                          child: Text(
+                            ayat[index][1],
+                            style: GoogleFonts.nunito(
+                              textStyle: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w500)),
+                          ),
+                          visible: false,
                         ),
                       )
                     ],

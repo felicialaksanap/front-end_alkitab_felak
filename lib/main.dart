@@ -25,7 +25,7 @@ void main() {
   runApp(const MaterialApp(
     title: "Widget Aplikasi Sementara",
     debugShowCheckedModeBanner: false,
-    home: MyApp(),
+    home: SplashScreen(),
   ));
 }
 

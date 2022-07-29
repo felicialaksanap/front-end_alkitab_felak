@@ -39,7 +39,7 @@ class _ListAlkitabState extends State<ListAlkitab> {
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 5, 
-              crossAxisSpacing: 20,
+              crossAxisSpacing: 12,
               mainAxisSpacing: 20,
             ), 
             itemCount: dataNamaKitab.isiNamaKitab.length,

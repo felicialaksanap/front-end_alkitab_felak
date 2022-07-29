@@ -40,7 +40,7 @@ class _ListAyatState extends State<ListAyat> {
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 5, 
-            crossAxisSpacing: 20,
+            crossAxisSpacing: 12,
             mainAxisSpacing: 20,
           ), 
           itemCount: ayat.length,
