@@ -30,13 +30,13 @@ class _CatatanPageState extends State<CatatanPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Tambah Renungan", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 30, color: Color.fromARGB(255, 85, 48, 29), fontWeight: FontWeight.bold))),
+              Text("Tambah Catatan", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 30, color: Color.fromARGB(255, 85, 48, 29), fontWeight: FontWeight.bold))),
               const SizedBox(height: 40,),
               Text("Highlight Bacaan", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29)))),
               const SizedBox(height: 10,),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 160,
+                height: 180,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: const Color.fromARGB(255, 140, 101, 58),
@@ -101,7 +101,9 @@ class _CatatanPageState extends State<CatatanPage> {
                 maxLines: 1,
               ),
               const SizedBox(height: 40,),
-              Row(
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
@@ -119,6 +121,7 @@ class _CatatanPageState extends State<CatatanPage> {
                     ),
                   ],
                 ),
+              ),
             ],
           ),
         ),

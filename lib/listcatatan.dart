@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_get_alkitab_json/catatanpage.dart';
+import 'package:flutter_get_alkitab_json/renunganpage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ListCatatan extends StatefulWidget {
@@ -97,46 +99,16 @@ class _ListCatatanState extends State<ListCatatan> {
           ],
         ),
       ),
-      // Container (
-      //   padding: const EdgeInsets.all(24.0),
-      //   child: Column(
-      //     children: [
-      //       const TextField(
-      //         cursorColor: Color.fromARGB(255, 95, 95, 95),
-      //         decoration: InputDecoration(
-      //           fillColor: Color.fromARGB(255, 253, 255, 252),
-      //           filled: true,
-      //           border: OutlineInputBorder(
-      //             borderSide: BorderSide(width: 3, color: Color.fromARGB(255, 85, 48, 29)),
-      //           ),
-      //           focusedBorder: OutlineInputBorder(
-      //             borderSide: BorderSide(width: 1, color: Color.fromARGB(255, 85, 48, 29)),
-      //           ),
-      //           hintText: 'Cari Taglines',
-      //           contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 5)
-      //         ),
-      //       ),
-
-      //       Container(
-      //         child: ListView.builder(
-      //           itemBuilder: (context, index) {
-      //             return Card(
-      //               child: Column(
-      //                 crossAxisAlignment: CrossAxisAlignment.start,
-      //                 children: [
-      //                   Text(itemJudul[index]),
-      //                   Text(itemKitab[index]),
-      //                   Text(itemBody[index]),
-      //                 ],
-      //               ),
-      //             );    
-      //           },
-      //           itemCount: itemJudul.length,
-      //         )
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context) => CatatanPage())
+          );
+        },
+        backgroundColor: Color.fromARGB(255, 85, 48, 29),
+        child: Icon(Icons.add, color: Colors.white,),
+      ),
     );
   }
 }

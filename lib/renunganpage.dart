@@ -36,7 +36,7 @@ class _RenunganPageState extends State<RenunganPage> {
               const SizedBox(height: 10,),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 160,
+                height: 180,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: const Color.fromARGB(255, 140, 101, 58),
@@ -118,24 +118,27 @@ class _RenunganPageState extends State<RenunganPage> {
                 maxLines: 1,
               ),
               const SizedBox(height: 40,),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 50,
-                      width: 150,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 140, 101, 58),
-                          elevation: 10,
-                          padding: const EdgeInsets.all(5),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        width: 150,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            primary: Color.fromARGB(255, 140, 101, 58),
+                            elevation: 10,
+                            padding: const EdgeInsets.all(5),
+                          ),
+                          child: Text("Create", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 20), fontWeight: FontWeight.bold),),
                         ),
-                        child: Text("Create", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 20), fontWeight: FontWeight.bold),),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+              ),
             ],
           ),
         ),

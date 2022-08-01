@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_get_alkitab_json/renunganpage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ListRenungan extends StatefulWidget {
@@ -94,6 +95,16 @@ class _ListRenunganState extends State<ListRenungan> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context) => RenunganPage())
+          );
+        },
+        backgroundColor: Color.fromARGB(255, 85, 48, 29),
+        child: Icon(Icons.add, color: Colors.white,),
       ),
     );
   }
