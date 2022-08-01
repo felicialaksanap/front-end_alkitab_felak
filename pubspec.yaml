@@ -72,6 +72,8 @@ flutter:
     - assets/images/search_icon.png
     - assets/images/polygon_down.png
     - assets/images/polygon_up.png
+    - assets/images/fromcamera.png
+    - assets/images/fromgallery.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

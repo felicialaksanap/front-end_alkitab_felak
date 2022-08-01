@@ -43,7 +43,7 @@ class _EditProfileState extends State<EditProfile> {
         elevation: 0,
         title: Text("Kembali", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 140, 101, 58), fontWeight: FontWeight.bold)),),
       ),
-      body: Container(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,45 +76,58 @@ class _EditProfileState extends State<EditProfile> {
                       context: context, 
                       builder: (BuildContext context) {
                         return Container(
-                          height: 200,
-                          color: Colors.transparent,
+                          height: 150,
+                          color: const Color.fromARGB(255, 233, 224, 215),
+                          padding: const EdgeInsets.only(top: 30),
                           child: Center(
-                            child: Column(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    pickImage(ImageSource.gallery);
-                                    Navigator.pop(context);
-                                  }, 
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color.fromARGB(255, 140, 101, 58),
-                                    elevation: 0,
-                                    padding: const EdgeInsets.all(5),
-                                  ),
-                                  child: Container(
-                                    width: 150,
-                                    height: 50,
-                                    child: Row(
-                                      children: [
-                                        Text("Gallery"),
-                                      ],
+                                Column(
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        pickImage(ImageSource.gallery);
+                                        Navigator.pop(context);
+                                      }, 
+                                      child: Image.asset(
+                                        'assets/images/fromgallery.png',
+                                        width: 40,
+                                        height: 40,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Pilih Dari Album",
+                                      style: GoogleFonts.roboto(textStyle: const TextStyle(
+                                        fontSize: 15,
+                                        color: Color.fromARGB(255, 85, 48, 29)
+                                      )),
                                     )
-                                  )
+                                  ],
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    pickImage(ImageSource.camera);
-                                    Navigator.pop(context);
-                                  }, 
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color.fromARGB(255, 140, 101, 58),
-                                    elevation: 10,
-                                    padding: const EdgeInsets.all(5),
-                                  ),
-                                  child: Text("Camera")
-                                )
+                                const SizedBox(width: 40,),
+                                Column(
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        pickImage(ImageSource.camera);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Image.asset(
+                                        'assets/images/fromcamera.png',
+                                        width: 40,
+                                        height: 40,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Mengambil Foto",
+                                      style: GoogleFonts.roboto(textStyle: const TextStyle(
+                                        fontSize: 15,
+                                        color: Color.fromARGB(255, 85, 48, 29)
+                                      )),
+                                    )
+                                  ],
+                                ),
                               ],
                             ),
                           ),

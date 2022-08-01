@@ -66,21 +66,34 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text("Nama Depan", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29)))),
                       Container(
                         height: 30,
-                        child: const TextField(
-                          cursorColor: Color.fromARGB(255, 85, 48, 29),
-                          decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 230, 225, 213),
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(width: 3, color: Color.fromARGB(255, 85, 48, 29)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(width: 1, color: Color.fromARGB(255, 85, 48, 29)),
-                            ),
-                            hintText: 'nama depan',
-                            contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 5)
-                          ),
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 230, 225, 213),
+                          border: Border.all(
+                            color: Color.fromARGB(255, 85, 48, 29),
+                            width: 3,
+                          )
                         ),
+                        child: Text(
+                          "Nama Depan",
+                          style: GoogleFonts.nunito(textStyle: const TextStyle(
+                            fontSize: 18,
+                          )),
+                        )
+                        // TextField(
+                        //   cursorColor: Color.fromARGB(255, 85, 48, 29),
+                        //   decoration: InputDecoration(
+                        //     fillColor: Color.fromARGB(255, 230, 225, 213),
+                        //     filled: true,
+                        //     border: OutlineInputBorder(
+                        //       borderSide: BorderSide(width: 3, color: Color.fromARGB(255, 85, 48, 29)),
+                        //     ),
+                        //     focusedBorder: OutlineInputBorder(
+                        //       borderSide: BorderSide(width: 1, color: Color.fromARGB(255, 85, 48, 29)),
+                        //     ),
+                        //     hintText: 'nama depan',
+                        //     contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 5)
+                        //   ),
+                        // ),
                       ),
                     ],
                   ),

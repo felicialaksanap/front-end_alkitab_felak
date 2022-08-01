@@ -66,6 +66,7 @@ class _MergeAyatState extends State<MergeAyat> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // paling atas
           Row(
             children: [
               Container(
@@ -86,12 +87,11 @@ class _MergeAyatState extends State<MergeAyat> {
 
                     Expanded(
                       child: Container(
-                        // padding: const EdgeInsets.only(left: 4,right: ),
                         child: GridView.builder(
                           shrinkWrap: true,
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            // crossAxisSpacing: 1,
+                            crossAxisSpacing: 5,
                             mainAxisSpacing: 10,
                             childAspectRatio: width / height,
                           ),
@@ -103,19 +103,54 @@ class _MergeAyatState extends State<MergeAyat> {
                                 borderRadius: BorderRadius.circular(50),
                                 color: const Color.fromARGB(255, 233, 224, 215),
                               ),
-                              child: Row(
+                              child: (items[index] != "...") 
+                              ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(items[index]),
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        items.removeAt(index);
-                                      });
-                                    }, 
-                                    icon: const Icon(Icons.cancel_outlined)
+                                  Container(
+                                    width: 70,
+                                    child: Text(
+                                      items[index],
+                                      style: GoogleFonts.nunito(
+                                        textStyle: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                          
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 20,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          items.removeAt(index);
+                                        });
+                                      }, 
+                                      icon: Icon(
+                                        Icons.cancel_outlined,
+                                        size: 20,
+                                      )
+                                    ),
+                                  )
+                                ],
+                              )
+                              : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    items[index],
+                                    style: GoogleFonts.nunito(
+                                      textStyle: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        
+                                      ),
+                                    ),
                                   ),
                                 ],
-                              ),
+                              ) 
                             );
                           }
                         ),
@@ -126,7 +161,7 @@ class _MergeAyatState extends State<MergeAyat> {
                       onPressed: () {
                         setState(() {
                           if (items.length < 5) {
-                            items.add("Matius 2:1");
+                            items.add("1 Tawarikh 2:1");
                           } else if (items.length == 5) {
                             items.add("...");
                           }
