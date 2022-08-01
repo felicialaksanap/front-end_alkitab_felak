@@ -65,35 +65,23 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Text("Nama Depan", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29)))),
                       Container(
+                        width: 300,
                         height: 30,
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 230, 225, 213),
                           border: Border.all(
                             color: Color.fromARGB(255, 85, 48, 29),
-                            width: 3,
-                          )
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(5)
                         ),
                         child: Text(
                           "Nama Depan",
                           style: GoogleFonts.nunito(textStyle: const TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                           )),
                         )
-                        // TextField(
-                        //   cursorColor: Color.fromARGB(255, 85, 48, 29),
-                        //   decoration: InputDecoration(
-                        //     fillColor: Color.fromARGB(255, 230, 225, 213),
-                        //     filled: true,
-                        //     border: OutlineInputBorder(
-                        //       borderSide: BorderSide(width: 3, color: Color.fromARGB(255, 85, 48, 29)),
-                        //     ),
-                        //     focusedBorder: OutlineInputBorder(
-                        //       borderSide: BorderSide(width: 1, color: Color.fromARGB(255, 85, 48, 29)),
-                        //     ),
-                        //     hintText: 'nama depan',
-                        //     contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 5)
-                        //   ),
-                        // ),
                       ),
                     ],
                   ),
@@ -105,22 +93,23 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Text("Nama Belakang", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29)))),
                       Container(
+                        width: 300,
                         height: 30,
-                        child: const TextField(
-                          cursorColor: Color.fromARGB(255, 85, 48, 29),
-                          decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 230, 225, 213),
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(width: 3, color: Color.fromARGB(255, 85, 48, 29)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(width: 1, color: Color.fromARGB(255, 85, 48, 29)),
-                            ),
-                            hintText: 'nama belakang',
-                            contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 5)
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 230, 225, 213),
+                          border: Border.all(
+                            color: Color.fromARGB(255, 85, 48, 29),
+                            width: 1,
                           ),
+                          borderRadius: BorderRadius.circular(5)
                         ),
+                        child: Text(
+                          "Nama Belakang",
+                          style: GoogleFonts.nunito(textStyle: const TextStyle(
+                            fontSize: 16,
+                          )),
+                        )
                       ),
                     ],
                   )
@@ -130,62 +119,65 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(height: 10,),
             Text("Email", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29)))),
             Container(
+              width: 400,
               height: 30,
-              child: const TextField(
-                cursorColor: Color.fromARGB(255, 85, 48, 29),
-                decoration: InputDecoration(
-                  fillColor: Color.fromARGB(255, 230, 225, 213),
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 3, color: Color.fromARGB(255, 85, 48, 29)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 1, color: Color.fromARGB(255, 85, 48, 29)),
-                  ),
-                  hintText: 'example@email.com',
-                  contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 5)
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 230, 225, 213),
+                border: Border.all(
+                  color: Color.fromARGB(255, 85, 48, 29),
+                  width: 1,
                 ),
+                borderRadius: BorderRadius.circular(5)
               ),
+              child: Text(
+                "example@email.com",
+                style: GoogleFonts.nunito(textStyle: const TextStyle(
+                  fontSize: 16,
+                )),
+              )
             ),
             const SizedBox(height: 10,),
             Text("Biografi", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29)))),
             Container(
+              width: 400,
               height: 30,
-              child: const TextField(
-                cursorColor: Color.fromARGB(255, 85, 48, 29),
-                decoration: InputDecoration(
-                  fillColor: Color.fromARGB(255, 230, 225, 213),
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 3, color: Color.fromARGB(255, 85, 48, 29)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 1, color: Color.fromARGB(255, 85, 48, 29)),
-                  ),
-                  hintText: 'Lorem Ipsum',
-                  contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 5)
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 230, 225, 213),
+                border: Border.all(
+                  color: Color.fromARGB(255, 85, 48, 29),
+                  width: 1,
                 ),
+                borderRadius: BorderRadius.circular(5)
               ),
+              child: Text(
+                "Lorem ipsum",
+                style: GoogleFonts.nunito(textStyle: const TextStyle(
+                  fontSize: 16,
+                )),
+              )
             ),
             const SizedBox(height: 10,),
             Text("Detail Lain", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29)))),
             Container(
+              width: 400,
               height: 30,
-              child: const TextField(
-                cursorColor: Color.fromARGB(255, 85, 48, 29),
-                decoration: InputDecoration(
-                  fillColor: Color.fromARGB(255, 230, 225, 213),
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 3, color: Color.fromARGB(255, 85, 48, 29)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 1, color: Color.fromARGB(255, 85, 48, 29)),
-                  ),
-                  hintText: 'Lorem Ipsum',
-                  contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 5)
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 230, 225, 213),
+                border: Border.all(
+                  color: Color.fromARGB(255, 85, 48, 29),
+                  width: 1,
                 ),
+                borderRadius: BorderRadius.circular(5)
               ),
+              child: Text(
+                "Lorem ipsum",
+                style: GoogleFonts.nunito(textStyle: const TextStyle(
+                  fontSize: 16,
+                )),
+              )
             ),
             const SizedBox(height: 20),
             Row(

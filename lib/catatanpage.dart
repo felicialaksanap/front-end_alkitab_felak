@@ -17,7 +17,9 @@ class _CatatanPageState extends State<CatatanPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: const Icon(Icons.arrow_back_rounded),
           color: const Color.fromARGB(255, 140, 101, 58)
         ),
@@ -110,7 +112,9 @@ class _CatatanPageState extends State<CatatanPage> {
                       height: 50,
                       width: 150,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                         style: ElevatedButton.styleFrom(
                           primary: Color.fromARGB(255, 140, 101, 58),
                           elevation: 10,
