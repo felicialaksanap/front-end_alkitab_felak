@@ -27,7 +27,7 @@ class _MergeAyatState extends State<MergeAyat> {
     // TODO: implement initState
     super.initState();
     generateListAlkitab();
-    viewListAyat();
+    // viewListAyat();
   }
 
   @override
@@ -47,18 +47,18 @@ class _MergeAyatState extends State<MergeAyat> {
     }
   }
 
-  @override
-  void viewListAyat () {
-    for (int i = 0; i < 10; i++) {
-      for (int j = 0; j < 3; j++) {
-        print(ayat[i][j]);
-        print("\n");
-        print(ayat[i][j]);
-        print("\n");
-        print(ayat[i][j]);
-      }
-    }
-  }
+  // @override
+  // void viewListAyat () {
+  //   for (int i = 0; i < 10; i++) {
+  //     for (int j = 0; j < 3; j++) {
+  //       print(ayat[i][j]);
+  //       print("\n");
+  //       print(ayat[i][j]);
+  //       print("\n");
+  //       print(ayat[i][j]);
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

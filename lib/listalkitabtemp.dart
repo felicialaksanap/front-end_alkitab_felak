@@ -103,5 +103,16 @@ class dataNamaKitab {
     dataAlkitabTemp("1 Tim"),
     dataAlkitabTemp("2 Tim"),
   ];
+}
 
+class dataCatatan {
+  String highlight;
+  String kitab;
+  String catatan;
+
+  dataCatatan({
+    required this.highlight,
+    required this.catatan,
+    required this.kitab
+  });
 }
