@@ -105,14 +105,23 @@ class dataNamaKitab {
   ];
 }
 
-class dataCatatan {
-  String highlight;
-  String kitab;
-  String catatan;
+// class dataCatatan {
+//   String highlight;
+//   String kitab;
+//   String catatan;
+//   String tagline;
 
-  dataCatatan({
-    required this.highlight,
-    required this.catatan,
-    required this.kitab
-  });
-}
+//   dataCatatan({
+//     required this.highlight,
+//     required this.catatan,
+//     required this.kitab,
+//     required this.tagline,
+//   });
+
+//   void addDataClass( String highlight, String kitab, String catatan, String tagline) {
+//     this.highlight = highlight;
+//     this.catatan = catatan;
+//     this.kitab = kitab;
+//     this.tagline = tagline;
+//   }
+// }

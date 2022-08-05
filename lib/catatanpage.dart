@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_get_alkitab_json/listcatatan.dart';
 // import 'package:flutter/src/widgets/container.dart';
 // import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +12,31 @@ class CatatanPage extends StatefulWidget {
 }
 
 class _CatatanPageState extends State<CatatanPage> {
+  final _ctrHighlight = TextEditingController();
+  // final _ctrKitab = TextEditingController();
+  final _ctrBody = TextEditingController();
+
+  List<String> listhighlight = [];
+  List<String> listkitab = [];
+  List<String> listbody = [];
+
+  void tambahData() {
+    setState(() {
+      listhighlight.add(_ctrHighlight.text);
+      listkitab.add("Kejadian 1:2");
+      listbody.add(_ctrBody.text);
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _ctrHighlight.dispose();
+    // _ctrKitab.dispose();
+    _ctrBody.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +75,10 @@ class _CatatanPageState extends State<CatatanPage> {
                   children: [
                     Text("Kejadian 1 : 2", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 12, color: Color.fromARGB(255, 253, 255, 252)))),
                     const SizedBox(height: 10,),
-                    const TextField(
+                    TextField(
+                      controller: _ctrHighlight,
                       cursorColor: Color.fromARGB(255, 85, 48, 29),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         fillColor: Color.fromARGB(255, 230, 225, 213),
                         filled: true,
                         border: OutlineInputBorder(
@@ -60,7 +87,6 @@ class _CatatanPageState extends State<CatatanPage> {
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(width: 1, color: Color.fromARGB(255, 85, 48, 29)),
                         ),
-                        hintText: 'Bumi belum terbentuk dan kosong',
                         contentPadding: EdgeInsets.all(10),
                       ),
                       maxLines: 5,
@@ -70,9 +96,10 @@ class _CatatanPageState extends State<CatatanPage> {
               ),
               const SizedBox(height: 40,),
               Text("Catatan", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29)))),
-              const TextField(
+              TextField(
+                controller: _ctrBody,
                 cursorColor: Color.fromARGB(255, 85, 48, 29),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   fillColor: Color.fromARGB(255, 230, 225, 213),
                   filled: true,
                   border: OutlineInputBorder(
@@ -113,7 +140,11 @@ class _CatatanPageState extends State<CatatanPage> {
                       width: 150,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          tambahData();
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(builder: (context) => ListCatatan(highlight: listhighlight, kitab: listkitab, body: listbody))
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           primary: Color.fromARGB(255, 140, 101, 58),

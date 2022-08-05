@@ -63,120 +63,85 @@ class _MergeAyatState extends State<MergeAyat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 140, 101, 58),
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          }, 
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          )
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                // if (items.length < 5) {
+                //   items.add("1 Tawarikh 2:1");
+                // } else if (items.length == 5) {
+                //   items.add("...");
+                // }
+                items.add("1 Tawarikh 2:1");
+                searchitems.add("Matius 2:1");
+              });
+            }, 
+            icon: const Icon(
+              Icons.add_circle_outline,
+              color: Colors.white,
+            )
+          ),
+        ],
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // paling atas
-          Row(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                color: const Color.fromARGB(255, 140, 101, 58),
-                padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-                child: Row (
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      }, 
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                      )
-                    ),
+          Container(
+            padding: const EdgeInsets.only(left: 16, top: 8),
+            child: Text(
+              "Ayat yang dibandingkan",
+              style: GoogleFonts.nunito(
+                  textStyle: const TextStyle(
+                      fontSize: 18, color: Color.fromARGB(255, 85, 48, 29))),
+            ),
+          ),
 
-                    Expanded(
-                      child: Container(
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 5,
-                            mainAxisSpacing: 10,
-                            childAspectRatio: width / height,
+          Container(
+            height: 60,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                return Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(28, 4, 4, 0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: const Color.fromARGB(255, 233, 224, 215),
+                      ),
+                      child: Row(
+                        children: [
+                          Text(items[index]),
+                          const SizedBox(width: 20,),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                items.removeAt(index);
+                              });
+                            }, 
+                            icon: const Icon(Icons.cancel_outlined)
                           ),
-                          itemCount: items.length, 
-                          itemBuilder: (context, index) {
-                            return Container(
-                              padding: const EdgeInsets.fromLTRB(6, 4, 2, 0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: const Color.fromARGB(255, 233, 224, 215),
-                              ),
-                              child: (items[index] != "...") 
-                              ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 70,
-                                    child: Text(
-                                      items[index],
-                                      style: GoogleFonts.nunito(
-                                        textStyle: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                          
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 20,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          items.removeAt(index);
-                                        });
-                                      }, 
-                                      icon: Icon(
-                                        Icons.cancel_outlined,
-                                        size: 20,
-                                      )
-                                    ),
-                                  )
-                                ],
-                              )
-                              : Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    items[index],
-                                    style: GoogleFonts.nunito(
-                                      textStyle: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold,
-                                        
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ) 
-                            );
-                          }
-                        ),
+                        ],
                       ),
                     ),
-
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          if (items.length < 5) {
-                            items.add("1 Tawarikh 2:1");
-                          } else if (items.length == 5) {
-                            items.add("...");
-                          }
-                          searchitems.add("Matius 2:1");
-                        });
-                      }, 
-                      icon: const Icon(
-                        Icons.add_circle_outline,
-                        color: Colors.white,
-                      )
-                    ),
+                    const SizedBox(width: 10,),
                   ],
-                ),
-              ),
-            ],
+                );
+              }
+            ),
           ),
 
           Container(
@@ -191,7 +156,7 @@ class _MergeAyatState extends State<MergeAyat> {
 
           Container(
             height: 60,
-            padding: const EdgeInsets.only(left: 16),
+            // padding: const EdgeInsets.only(left: 16),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: searchitems.length,

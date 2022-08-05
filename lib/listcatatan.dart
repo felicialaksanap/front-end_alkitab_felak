@@ -2,23 +2,68 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_get_alkitab_json/catatanpage.dart';
+import 'package:flutter_get_alkitab_json/listalkitabtemp.dart';
 import 'package:flutter_get_alkitab_json/renunganpage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ListCatatan extends StatefulWidget {
-  const ListCatatan({super.key});
+  final List<String> highlight;
+  final List<String> kitab;
+  final List<String> body;
+  const ListCatatan({
+    super.key,
+    required this.highlight,
+    required this.kitab,
+    required this.body
+    // required this.highlight,
+    // required this.kitab,
+    // required this.body,
+    // required this.tagline
+  });
 
   @override
   State<ListCatatan> createState() => _ListCatatanState();
 }
 
 class _ListCatatanState extends State<ListCatatan> {
+  // List<dataCatatan> itemCatatan = [];
 
-  List itemJudul = List.generate(10, (index) => "Bumi berbentuk dan kosong");
-  List itemKitab = List.generate(10, (index) => "Mazmur 9 : 2");
-  List itemBody = List.generate(10, (index) => "Lorem ipsum dolor sit amet, consectetur adispiscing elit."
-                                              + " Tellus dui eget habitant sed ornare enim amet accumsan" 
-                                              + " egestas. Eu.");
+  // String itemHighlight = "";
+  // String itemKitab = "";
+  // String itemBody = "";
+  // String itemTagline = "";
+
+  // List<String> itemJudul = [];
+  // List<String> itemKitab = [];
+  // List<String> itemBody = [];
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  // }
+
+  // void addList() {
+  //   itemJudul.add(widget.highlight);
+  //   itemKitab.add(widget.kitab);
+  //   itemBody.add(widget.body);
+  // }
+
+  // void addtoList() {
+  //   itemHighlight = widget.highlight;
+  //   itemKitab = widget.kitab;
+  //   itemBody = widget.body;
+  //   itemTagline = widget.tagline;
+
+  //   itemCatatan.add(itemHighlight);
+  // }
+
+
+  // List itemJudul = List.generate(10, (index) => "Bumi berbentuk dan kosong");
+  // List itemKitab = List.generate(10, (index) => "Mazmur 9 : 2");
+  // List itemBody = List.generate(10, (index) => "Lorem ipsum dolor sit amet, consectetur adispiscing elit."
+  //                                             + " Tellus dui eget habitant sed ornare enim amet accumsan" 
+  //                                             + " egestas. Eu.");
 
   @override
   Widget build(BuildContext context) {
@@ -82,17 +127,17 @@ class _ListCatatanState extends State<ListCatatan> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(itemJudul[index], style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
+                            Text(widget.highlight[index], style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
                             const SizedBox(height: 5,),
-                            Text(itemKitab[index], style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w300,color: Color.fromARGB(255, 85, 48, 29))),),
+                            Text(widget.kitab[index], style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w300,color: Color.fromARGB(255, 85, 48, 29))),),
                             const SizedBox(height: 20,),
-                            Text(itemBody[index], style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
+                            Text(widget.body[index], style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
                           ],
                         ),
                       ),
                     );    
                   },
-                  itemCount: itemJudul.length,
+                  itemCount: widget.highlight.length
                 )
               ),
             ),

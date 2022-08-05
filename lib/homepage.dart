@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ListCatatan()));
+                              builder: (context) => ListCatatan(highlight: [], kitab: [], body: [])));
                     },
                   ),
                   const SizedBox(height: 10,),
