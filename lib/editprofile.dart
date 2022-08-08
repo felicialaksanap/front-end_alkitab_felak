@@ -111,7 +111,7 @@ class _EditProfileState extends State<EditProfile> {
                                     TextButton(
                                       onPressed: () {
                                         pickImage(ImageSource.camera);
-                                        Navigator.pop(context);
+                                        // Navigator.pop(context);
                                       },
                                       child: Image.asset(
                                         'assets/images/fromcamera.png',
