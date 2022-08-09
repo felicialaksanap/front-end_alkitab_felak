@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -20,19 +21,11 @@ class _CatatanPageState extends State<CatatanPage> {
   final ctr_highlight = TextEditingController();
   final ctr_catatan = TextEditingController();
   final ctr_tagline = TextEditingController();
-  String text_read = "";
+  String text_read = "Kejadian 1:2";
 
   List<String> listhighlight = [];
   List<String> listkitab = [];
   List<String> listbody = [];
-
-  // void tambahData() {
-  //   setState(() {
-  //     listhighlight.add(_ctrHighlight.text);
-  //     listkitab.add("Kejadian 1:2");
-  //     listbody.add(_ctrBody.text);
-  //   });
-  // }
 
   @override
   void dispose() {
@@ -43,23 +36,54 @@ class _CatatanPageState extends State<CatatanPage> {
     super.dispose();
   }
 
-  String dataCatatan = '';
-  // SERVICES SAVE TO JSON
-  Future<String> get _localPath async {
+  // SERVICES FILE TEXT
+  Future<String> get _localPath async { //get path
     final directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
 
-  Future<File> get _localFile async {
+  Future<File> get _localFile async { // get file
     final path = await _localPath;
     return File('/storage/emulated/0/Download/catatanpribadi.txt');
   }
 
-  Future<File> saveToFile() async {
-    final file = await _localFile;
-    return file.writeAsString(ctr_highlight.text);
-  }
+  String dataCatatan = '';
+  List listTempData = [];
+  List<String> listTempHighlight = [];
+  List<String> listTempKitab = [];
+  List<String> listTempCatatan = [];
+  List<String> listTempTagline = [];
 
+  Future<File> writeData() async { // write data
+    // get data save to temp variable
+    final file = await _localFile;
+    final contents = await file.readAsString();
+    listTempData = json.decode(contents);
+
+    // format ke Json String
+    setState(() {
+      // print('data lama : $listTempData');
+      dataCatatan = '';
+      dataCatatan = dataCatatan + "[";
+      for (int i = 0; i < listTempData.length; i++) {
+        dataCatatan = dataCatatan + "{";
+        dataCatatan = dataCatatan + '"Highlight":"' + listTempData[i]['Highlight'].toString()
+                    + '","Kitab":"' + listTempData[i]['Kitab'].toString()
+                    + '","Catatan":"' + listTempData[i]['Catatan'].toString()
+                    + '","Tagline":"' +listTempData[i]['Tagline'].toString()
+                    + '"}' + ",";
+      }
+      dataCatatan = dataCatatan + "{"
+                + '"Highlight":"' + ctr_highlight.text 
+                + '","Kitab":"' + text_read 
+                + '","Catatan":"' + ctr_catatan.text 
+                + '","Tagline":"' + ctr_tagline.text
+                + '"}';
+      dataCatatan = dataCatatan + "]";
+      // print(dataCatatan);
+    });
+    return file.writeAsString(dataCatatan);
+  }
   // END OF SERVICES
 
 
@@ -166,7 +190,6 @@ class _CatatanPageState extends State<CatatanPage> {
               ),
               const SizedBox(height: 30,),
               Text("Pilih Warna", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29)))),
-              Text(text_read),
               const SizedBox(height: 40,),
               Padding(
                 padding: const EdgeInsets.only(bottom: 30.0),
@@ -175,7 +198,7 @@ class _CatatanPageState extends State<CatatanPage> {
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
                     onPressed: () {
-                      saveToFile();
+                      writeData();
                       Navigator.push(
                         context, 
                         MaterialPageRoute(builder: (context) => ListCatatan(highlight: listhighlight, kitab: listkitab, body: listbody))

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -30,11 +32,6 @@ class ListCatatan extends StatefulWidget {
 
 class _ListCatatanState extends State<ListCatatan> {
   // List<dataCatatan> itemCatatan = [];
-
-  String itemHighlight = "";
-  String itemKitab = "Kejadian 1:2";
-  String itemCatatan = "Lorem Ipsum dolor sit amet, sisanya tebak sendiri";
-  // String itemTagline = "";
 
   // List<String> itemJudul = [];
   // List<String> itemKitab = [];
@@ -79,13 +76,28 @@ class _ListCatatanState extends State<ListCatatan> {
     final path = await _localPath;
     return File('/storage/emulated/0/Download/catatanpribadi.txt');
   }
+  
+  List listDataCat = [];
+  List<String> itemHighlight = [];
+  List<String> itemKitab = [];
+  List<String> itemCatatan = [];
+  List<String> itemTagline = [];
+  // String itemHighlight = "";
+  // String itemKitab = "";
+  // String itemCatatan = "";
+  // String itemTagline = "";
 
   void readFile() async {
     final file = await _localFile;
     final contents = await file.readAsString();
     setState(() {
-      itemHighlight = contents;
-      print('highlight : $itemHighlight');
+      listDataCat = json.decode(contents);
+      for (int i = 0; i < listDataCat.length; i++) {
+        itemHighlight.add(listDataCat[i]['Highlight'].toString());
+        itemKitab.add(listDataCat[i]['Kitab'].toString());
+        itemCatatan.add(listDataCat[i]['Catatan'].toString());
+        itemTagline.add(listDataCat[i]['Tagline'].toString());
+      }
     });
   }
 
@@ -94,9 +106,6 @@ class _ListCatatanState extends State<ListCatatan> {
     // TODO: implement initState
     super.initState();
     readFile();
-    setState(() {
-      print('highlight : $itemHighlight');
-    });
   }
   // END OF SERVICES
 
@@ -113,7 +122,6 @@ class _ListCatatanState extends State<ListCatatan> {
           icon: const Icon(Icons.arrow_back_rounded),
           color: const Color.fromARGB(255, 140, 101, 58)
         ),
-        // title: Text("Kembali", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 140, 101, 58), fontWeight: FontWeight.bold)),),
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
@@ -144,41 +152,44 @@ class _ListCatatanState extends State<ListCatatan> {
             ),
 
             const SizedBox(height: 10,),
-            Text(itemHighlight),
             Expanded(
               child: Container(
                 child: ListView.builder( 
                   itemBuilder: (context, index) {
-                    return Card(
-                      elevation: 0,
-                      color: const Color.fromARGB(255, 230, 225, 213),
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                          color: Color.fromARGB(255, 85, 48, 29)
+                    return GestureDetector(
+                      child: Card(
+                        elevation: 0,
+                        color: const Color.fromARGB(255, 230, 225, 213),
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                            color: Color.fromARGB(255, 85, 48, 29)
+                          ),
+                          borderRadius: BorderRadius.circular(5),
                         ),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('$itemHighlight', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
-                            const SizedBox(height: 5,),
-                            Text(itemKitab, style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w300,color: Color.fromARGB(255, 85, 48, 29))),),
-                            const SizedBox(height: 20,),
-                            Text(itemCatatan, style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
-                            // Text(widget.highlight[index], style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
-                            // const SizedBox(height: 5,),
-                            // Text(widget.kitab[index], style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w300,color: Color.fromARGB(255, 85, 48, 29))),),
-                            // const SizedBox(height: 20,),
-                            // Text(widget.body[index], style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
-                          ],
+                        child: Container(
+                          padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('${itemHighlight[index]}', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
+                              const SizedBox(height: 5,),
+                              Text('${itemKitab[index]}', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w300,color: Color.fromARGB(255, 85, 48, 29))),),
+                              const SizedBox(height: 20,),
+                              Text('${itemCatatan[index]}', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
+                            ],
+                          ),
                         ),
                       ),
-                    );    
+                      onTap: () {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => CatatanPage())
+                        );
+
+                      },
+                    );  
                   },
-                  itemCount: 1
+                  itemCount: itemHighlight.length,
                 )
               ),
             ),
