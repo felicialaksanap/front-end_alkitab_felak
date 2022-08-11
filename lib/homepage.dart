@@ -8,6 +8,7 @@ import 'package:flutter_get_alkitab_json/listrenungan.dart';
 import 'package:flutter_get_alkitab_json/loginpage.dart';
 import 'package:flutter_get_alkitab_json/mergeayat.dart';
 import 'package:flutter_get_alkitab_json/profile.dart';
+import 'package:flutter_get_alkitab_json/profilepage.dart';
 import 'package:flutter_get_alkitab_json/searchalkitab.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -102,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                         );
                       } else if (widget.statusLogin == true) {
                         Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ProfilePage())
+                          MaterialPageRoute(builder: (context) => ProfilePageMenu())
                         );
                       }
                     },
@@ -144,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ListCatatan(highlight: [], kitab: [], body: [])));
+                              builder: (context) => ListCatatan()));
                     },
                   ),
                   const SizedBox(height: 10,),

@@ -1,9 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_get_alkitab_json/catatanpage.dart';
+import 'package:flutter_get_alkitab_json/homepage.dart';
 import 'package:flutter_get_alkitab_json/listalkitabtemp.dart';
 import 'package:flutter_get_alkitab_json/renunganpage.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,18 +15,8 @@ import 'dart:async';
 import 'dart:io';
 
 class ListCatatan extends StatefulWidget {
-  final List<String> highlight;
-  final List<String> kitab;
-  final List<String> body;
   const ListCatatan({
     super.key,
-    required this.highlight,
-    required this.kitab,
-    required this.body
-    // required this.highlight,
-    // required this.kitab,
-    // required this.body,
-    // required this.tagline
   });
 
   @override
@@ -31,40 +24,13 @@ class ListCatatan extends StatefulWidget {
 }
 
 class _ListCatatanState extends State<ListCatatan> {
-  // List<dataCatatan> itemCatatan = [];
-
-  // List<String> itemJudul = [];
-  // List<String> itemKitab = [];
-  // List<String> itemBody = [];
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
-
-  // void addList() {
-  //   itemJudul.add(widget.highlight);
-  //   itemKitab.add(widget.kitab);
-  //   itemBody.add(widget.body);
-  // }
-
-  // void addtoList() {
-  //   itemHighlight = widget.highlight;
-  //   itemKitab = widget.kitab;
-  //   itemBody = widget.body;
-  //   itemTagline = widget.tagline;
-
-  //   itemCatatan.add(itemHighlight);
-  // }
-
-
-  // List itemJudul = List.generate(10, (index) => "Bumi berbentuk dan kosong");
-  // List itemKitab = List.generate(10, (index) => "Mazmur 9 : 2");
-  // List itemBody = List.generate(10, (index) => "Lorem ipsum dolor sit amet, consectetur adispiscing elit."
-  //                                             + " Tellus dui eget habitant sed ornare enim amet accumsan" 
-  //                                             + " egestas. Eu.");
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    readFile();
+    // readFile();
+  }
 
   // SERVICES FILE JSON
   Future<String> get _localPath async {
@@ -82,30 +48,56 @@ class _ListCatatanState extends State<ListCatatan> {
   List<String> itemKitab = [];
   List<String> itemCatatan = [];
   List<String> itemTagline = [];
-  // String itemHighlight = "";
-  // String itemKitab = "";
-  // String itemCatatan = "";
-  // String itemTagline = "";
 
   void readFile() async {
     final file = await _localFile;
     final contents = await file.readAsString();
     setState(() {
-      listDataCat = json.decode(contents);
-      for (int i = 0; i < listDataCat.length; i++) {
-        itemHighlight.add(listDataCat[i]['Highlight'].toString());
-        itemKitab.add(listDataCat[i]['Kitab'].toString());
-        itemCatatan.add(listDataCat[i]['Catatan'].toString());
-        itemTagline.add(listDataCat[i]['Tagline'].toString());
+      // print("content : $contents");
+      if (contents.isNotEmpty) {
+        listDataCat = json.decode(contents);
+        for (int i = 0; i < listDataCat.length; i++) {
+          itemHighlight.add(listDataCat[i]['Highlight'].toString());
+          itemKitab.add(listDataCat[i]['Kitab'].toString());
+          itemCatatan.add(listDataCat[i]['Catatan'].toString());
+          itemTagline.add(listDataCat[i]['Tagline'].toString());
+        }
       }
     });
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    readFile();
+  String dataCatatan = '';
+
+  Future<File> deleteData(int indexdata) async {
+    final file = await _localFile;
+    print("data lama: $listDataCat");
+    listDataCat.removeAt(indexdata);
+    print("data baru : $listDataCat");
+
+    dataCatatan = dataCatatan + "[";
+    for (int i = 0; i < listDataCat.length; i++) {
+      dataCatatan = dataCatatan + "{";
+      dataCatatan = dataCatatan + '"Highlight":"' + listDataCat[i]['Highlight'].toString()
+                  + '","Kitab":"' + listDataCat[i]['Kitab'].toString()
+                  + '","Catatan":"' + listDataCat[i]['Catatan'].toString()
+                  + '","Tagline":"' +listDataCat[i]['Tagline'].toString()
+                  + '"}';
+      if (listDataCat.length != 1 && i != listDataCat.length - 1) {
+          dataCatatan = dataCatatan + ',';
+        }
+    }
+    dataCatatan = dataCatatan + "]";
+    print("data cat: $dataCatatan");
+
+    // for (int i = 0; i < listDataCat.length; i++) {
+    //   if (i != indexdata) {
+    //     // print("masuk");
+    //     dataCatBaru = listDataCat[i];
+    //   }
+    // }
+    // print("data baru : $dataCatBaru");    // listDataCat.removeAt(indexdata);
+    // print("data: $listDataCat");
+    return file.writeAsString(dataCatatan);
   }
   // END OF SERVICES
 
@@ -117,7 +109,10 @@ class _ListCatatanState extends State<ListCatatan> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context, 
+              MaterialPageRoute(builder: (context) => HomePage(statusLogin: false))
+            );
           },
           icon: const Icon(Icons.arrow_back_rounded),
           color: const Color.fromARGB(255, 140, 101, 58)
@@ -181,11 +176,16 @@ class _ListCatatanState extends State<ListCatatan> {
                         ),
                       ),
                       onTap: () {
+                        // Update data
                         Navigator.push(
                           context, 
-                          MaterialPageRoute(builder: (context) => CatatanPage())
+                          MaterialPageRoute(builder: (context) => CatatanPage(status: 'edit', index: index))
                         );
 
+                      },
+                      onLongPress: () {
+                        // delete data
+                        deleteData(index);
                       },
                     );  
                   },
@@ -200,7 +200,7 @@ class _ListCatatanState extends State<ListCatatan> {
         onPressed: () {
           Navigator.push(
             context, 
-            MaterialPageRoute(builder: (context) => CatatanPage())
+            MaterialPageRoute(builder: (context) => CatatanPage(status: 'tambah', index: 0))
           );
         },
         backgroundColor: Color.fromARGB(255, 85, 48, 29),
