@@ -266,6 +266,7 @@ class _CatatanPageState extends State<CatatanPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       writeData();
+                      // Navigator.pop(context);
                       Navigator.push(
                         context, 
                         MaterialPageRoute(builder: (context) => ListCatatan())

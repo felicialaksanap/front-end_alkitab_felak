@@ -28,6 +28,12 @@ class _EditProfileState extends State<EditProfile> {
     }
   }
 
+  TextEditingController _ctrNamaDepan = TextEditingController();
+  TextEditingController _ctrNamaBelakang = TextEditingController();
+  TextEditingController _ctrEmail = TextEditingController();
+  TextEditingController _ctrBiografi = TextEditingController();
+  TextEditingController _ctrDetailLain = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

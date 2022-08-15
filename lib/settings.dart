@@ -33,16 +33,20 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "Dark Mode",
-                  style: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29))),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Text(
+                    "Dark Mode",
+                    style: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29))),
+                  ),
                 ),
                 FlutterSwitch(
-                  width: 75.0,
+                  width: 60.0,
                   height: 30.0,
-                  // activeToggleColor: Colors.black,
-                  toggleColor: Colors.black,
+                  inactiveColor: Colors.black,
+                  activeColor: Color.fromARGB(255, 0, 206, 77),
                   value: status, 
                   onToggle: (val) {
                     setState(() {
@@ -58,13 +62,55 @@ class _SettingsPageState extends State<SettingsPage> {
               color: Colors.black,
             ),
             const SizedBox(height: 20,),
-            Row(
-              children: [
-                Text(
-                  "Font Size",
-                  style: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29))),
-                ),
-              ],
+            ListTile(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context, 
+                  builder: (BuildContext context) {
+                    return Container(
+                      height: 250,
+                      color: const Color.fromARGB(255, 233, 224, 215),
+                      padding: const EdgeInsets.all(8),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text(
+                              "Small",
+                              style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 10, color: Color.fromARGB(255, 85, 48, 29))),
+                            ),
+                          ),
+                          ListTile(
+                            title: Text(
+                              "Medium",
+                              style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 14, color: Color.fromARGB(255, 85, 48, 29))),
+                            ),
+                          ),
+                          ListTile(
+                            title: Text(
+                              "Large",
+                              style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29))),
+                            ),
+                          ),
+                          ListTile(
+                            title: Text(
+                              "Extra Large",
+                              style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 22, color: Color.fromARGB(255, 85, 48, 29))),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                );
+              },
+              title: Text(
+                "Font Size",
+                style: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29))),
+              ),
+              trailing: Text(
+                ">",
+                style: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29))),
+              ),
             ),
             const SizedBox(height: 10,),
             Container(

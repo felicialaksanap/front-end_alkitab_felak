@@ -166,27 +166,78 @@ class _ListCatatanState extends State<ListCatatan> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('${itemHighlight[index]}', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text('${itemHighlight[index]}', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),)
+                                  ),
+                                  PopupMenuButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(8))
+                                    ),
+                                    itemBuilder: (context) => [
+                                      PopupMenuItem(
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.create),
+                                            SizedBox(width: 5),
+                                            Text("Edit"),
+                                          ],
+                                        ),
+                                        value: 1,
+                                      ),
+                                      PopupMenuItem(
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.auto_delete),
+                                            SizedBox(width: 5),
+                                            Text("Delete"),
+                                          ],
+                                        ),
+                                        value: 2,
+                                      ),
+                                    ],
+                                    onSelected: (value) {
+                                      if (value == 1) {
+                                        Navigator.push(
+                                          context, 
+                                          MaterialPageRoute(builder: (context) => CatatanPage(status: 'edit', index: index))
+                                        );
+                                      } else if (value == 2) {
+                                        deleteData(index);
+                                      }
+                                    },
+                                  )
+                                  // IconButton(
+                                  //   onPressed: () {
+                                  //   }, 
+                                  //   icon: Icon(Icons.more_horiz_outlined)
+                                  // ),
+                                ],
+                              ),
                               const SizedBox(height: 5,),
                               Text('${itemKitab[index]}', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w300,color: Color.fromARGB(255, 85, 48, 29))),),
+                              const SizedBox(height: 5,),
+                              Text('${itemTagline[index]}', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w300,color: Color.fromARGB(255, 85, 48, 29))),),
                               const SizedBox(height: 20,),
                               Text('${itemCatatan[index]}', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
                             ],
                           ),
                         ),
                       ),
-                      onTap: () {
-                        // Update data
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(builder: (context) => CatatanPage(status: 'edit', index: index))
-                        );
+                      // onTap: () {
+                      //   // Update data
+                      //   Navigator.push(
+                      //     context, 
+                      //     MaterialPageRoute(builder: (context) => CatatanPage(status: 'edit', index: index))
+                      //   );
 
-                      },
-                      onLongPress: () {
-                        // delete data
-                        deleteData(index);
-                      },
+                      // },
+                      // onLongPress: () {
+                      //   // delete data
+                      //   deleteData(index);
+                      // },
                     );  
                   },
                   itemCount: itemHighlight.length,
