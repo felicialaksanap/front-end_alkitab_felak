@@ -56,7 +56,7 @@ class _ListAyatState extends State<ListAyat> {
                     onPressed: () {
                       Navigator.push(
                         context, 
-                        MaterialPageRoute(builder: (context) => HomePage(statusLogin: false,))
+                        MaterialPageRoute(builder: (context) => HomePage())
                       );
                     }, 
                     child: Text(ayat[index]),

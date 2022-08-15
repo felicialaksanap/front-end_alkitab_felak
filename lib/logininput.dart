@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_get_alkitab_json/homepage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginInput extends StatefulWidget {
   const LoginInput({super.key});
@@ -12,6 +13,13 @@ class LoginInput extends StatefulWidget {
 }
 
 class _LoginInputState extends State<LoginInput> {
+  // SHARED PREFERENCES
+  addBoolToSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('statusLogin', true);
+  }
+  // END OF SHARED PREFERENCES
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,10 +157,11 @@ class _LoginInputState extends State<LoginInput> {
                     width: 300,
                     child: ElevatedButton(
                       onPressed: () {
+                        addBoolToSF();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomePage(statusLogin: true)));
+                                builder: (context) => HomePage()));
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Color.fromARGB(255, 140, 101, 58),

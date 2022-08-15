@@ -11,16 +11,43 @@ import 'package:flutter_get_alkitab_json/profile.dart';
 import 'package:flutter_get_alkitab_json/profilepage.dart';
 import 'package:flutter_get_alkitab_json/searchalkitab.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
-  final bool statusLogin;
-  const HomePage({super.key, required this.statusLogin});
+  // final bool statusLogin;
+  const HomePage({
+    super.key, 
+    // required this.statusLogin
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  // SHARED PREFENCES
+  late bool statusLogin;
+
+  // addBoolToSF() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setBool('statusLogin', statusLogin);
+  // }
+
+  getBoolValueSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Return bool
+    statusLogin = prefs.getBool('statusLogin') ?? false;
+    return statusLogin;
+  }
+  // END OF SHARED PREFERENCES
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getBoolValueSF();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,11 +124,11 @@ class _HomePageState extends State<HomePage> {
                               color: Color.fromARGB(255, 140, 101, 58))),
                     ),
                     onTap: () {
-                      if (widget.statusLogin == false) {
+                      if (statusLogin == false) {
                         Navigator.push(context,
                           MaterialPageRoute(builder: (context) => LoginPage())
                         );
-                      } else if (widget.statusLogin == true) {
+                      } else if (statusLogin == true) {
                         Navigator.push(context,
                           MaterialPageRoute(builder: (context) => ProfilePageMenu())
                         );

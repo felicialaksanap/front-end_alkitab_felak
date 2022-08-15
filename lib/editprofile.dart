@@ -219,22 +219,20 @@ class _EditProfileState extends State<EditProfile> {
             ),
             const SizedBox(height: 10,),
             Text("Biografi", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29)))),
-            Container(
-              height: 30,
-              child: const TextField(
-                cursorColor: Color.fromARGB(255, 85, 48, 29),
-                decoration: InputDecoration(
-                  fillColor: Color.fromARGB(255, 230, 225, 213),
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 3, color: Color.fromARGB(255, 85, 48, 29)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 1, color: Color.fromARGB(255, 85, 48, 29)),
-                  ),
-                  hintText: 'Lorem Ipsum',
-                  contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 5)
+            const TextField(
+              maxLines: 3,
+              cursorColor: Color.fromARGB(255, 85, 48, 29),
+              decoration: InputDecoration(
+                fillColor: Color.fromARGB(255, 230, 225, 213),
+                filled: true,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(width: 3, color: Color.fromARGB(255, 85, 48, 29)),
                 ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(width: 1, color: Color.fromARGB(255, 85, 48, 29)),
+                ),
+                hintText: 'Lorem Ipsum',
+                contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 5)
               ),
             ),
             const SizedBox(height: 10,),

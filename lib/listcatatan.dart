@@ -111,7 +111,7 @@ class _ListCatatanState extends State<ListCatatan> {
           onPressed: () {
             Navigator.push(
               context, 
-              MaterialPageRoute(builder: (context) => HomePage(statusLogin: false))
+              MaterialPageRoute(builder: (context) => HomePage())
             );
           },
           icon: const Icon(Icons.arrow_back_rounded),

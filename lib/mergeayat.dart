@@ -198,37 +198,60 @@ class _MergeAyatState extends State<MergeAyat> {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: const EdgeInsets.fromLTRB(16, 12, 0, 12),
-                        color: const Color.fromARGB(255, 233, 224, 215),
-                        child: Row(
-                          children: [
-                            Text(
-                              ayat[index][0],
-                              style: GoogleFonts.nunito(
-                                textStyle: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                setState(() {
-                                  if (ayat[index][2] == "false") {
-                                    ayat[index][2] = "true";
-                                  } else if (ayat[index][2] == "true") {
-                                    ayat[index][2] = "false";
-                                  }
-                                });
-                              }, 
-                              child: (ayat[index][2] == "true") 
-                              ? Image.asset('assets/images/polygon_up.png')
-                              : Image.asset('assets/images/polygon_down.png')
-
-                            ),
-                          ],
+                      ListTile(
+                        leading: Text(
+                          ayat[index][0],
+                          style: GoogleFonts.nunito(
+                            textStyle: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w500),
+                          ),
                         ),
+                        trailing: TextButton(
+                          onPressed: () {
+                            setState(() {
+                              if (ayat[index][2] == "false") {
+                                ayat[index][2] = "true";
+                              } else if (ayat[index][2] == "true") {
+                                ayat[index][2] = "false";
+                              }
+                            });
+                          }, 
+                          child: (ayat[index][2] == "true") 
+                          ? Image.asset('assets/images/polygon_up.png')
+                          : Image.asset('assets/images/polygon_down.png'),
+                        )
                       ),
+                      // Container(
+                      //   width: MediaQuery.of(context).size.width,
+                      //   padding: const EdgeInsets.fromLTRB(16, 12, 0, 12),
+                      //   color: const Color.fromARGB(255, 233, 224, 215),
+                      //   child: Row(
+                      //     children: [
+                      //       Text(
+                      //         ayat[index][0],
+                      //         style: GoogleFonts.nunito(
+                      //           textStyle: const TextStyle(
+                      //             fontSize: 18, fontWeight: FontWeight.w500),
+                      //         ),
+                      //       ),
+                      //       TextButton(
+                      //         onPressed: () {
+                      //           setState(() {
+                      //             if (ayat[index][2] == "false") {
+                      //               ayat[index][2] = "true";
+                      //             } else if (ayat[index][2] == "true") {
+                      //               ayat[index][2] = "false";
+                      //             }
+                      //           });
+                      //         }, 
+                      //         child: (ayat[index][2] == "true") 
+                      //         ? Image.asset('assets/images/polygon_up.png')
+                      //         : Image.asset('assets/images/polygon_down.png')
+
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       Container(
                         padding: const EdgeInsets.fromLTRB(16, 12, 0, 12),
                         child: (ayat[index][2] == "true")

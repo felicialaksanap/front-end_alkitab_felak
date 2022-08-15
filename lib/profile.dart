@@ -26,18 +26,6 @@ class _ProfilePageState extends State<ProfilePage> {
           icon: const Icon(Icons.arrow_back_rounded),
           color: const Color.fromARGB(255, 140, 101, 58)
         ),
-        actions: [
-          IconButton(
-          onPressed: () {
-            Navigator.push(
-              context, 
-              MaterialPageRoute(builder: (context) => HomePage(statusLogin: false))
-            );
-          },
-          icon: const Icon(Icons.power_settings_new_rounded),
-          color: const Color.fromARGB(255, 140, 101, 58)
-        ),
-        ],
         elevation: 0,
         title: Text("Kembali", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 140, 101, 58), fontWeight: FontWeight.bold)),),
       ),
@@ -48,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Icon(
                   Icons.account_circle_outlined,
                   color: Color.fromARGB(255, 140, 101, 58),
@@ -141,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Text("Biografi", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29)))),
             Container(
               width: 400,
-              height: 30,
+              height: 60,
               padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 230, 225, 213),
