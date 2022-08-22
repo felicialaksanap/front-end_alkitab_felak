@@ -1,8 +1,15 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_get_alkitab_json/homepage.dart';
 import 'package:flutter_get_alkitab_json/renunganpage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:async';
+import 'dart:io';
 
 class ListRenungan extends StatefulWidget {
   const ListRenungan({super.key});
@@ -13,11 +20,86 @@ class ListRenungan extends StatefulWidget {
 
 class _ListRenunganState extends State<ListRenungan> {
 
-  List itemJudul = List.generate(10, (index) => "Bumi berbentuk dan kosong");
-  List itemKitab = List.generate(10, (index) => "Mazmur 9 : 2");
-  List itemBody = List.generate(10, (index) => "Lorem ipsum dolor sit amet, consectetur adispiscing elit."
-                                              + " Tellus dui eget habitant sed ornare enim amet accumsan" 
-                                              + " egestas. Eu.");
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    readFile();
+  }
+
+  // SERVICES FILE JSON TEXT
+  List listDataRenungan = []; // read and display
+  List listDataTemp = []; // temp
+  String dataRenungan = '';
+  
+  List<String> itemHighlight = [];
+  List<String> itemKitab = [];
+  List<String> itemSabda = [];
+  List<String> itemTindakan = [];
+  List<String> itemTagline = [];
+
+  void readFile() async {
+    String path = '/storage/emulated/0/Download/renunganpribadi.txt';
+    bool directoryExists = await Directory(path).exists();
+    bool fileExists = await File(path).exists();
+
+    if (directoryExists || fileExists) {
+      final contents = await File(path).readAsString();
+      listDataRenungan = []; //reset dulu
+      if (contents.isNotEmpty) {
+        listDataRenungan = json.decode(contents);
+        setState(() {
+          for (int i = 0; i < listDataRenungan.length; i++) {
+            itemHighlight.add(listDataRenungan[i]['Highlight'].toString());
+            itemKitab.add(listDataRenungan[i]['Kitab'].toString());
+            itemSabda.add(listDataRenungan[i]['Sabda'].toString());
+            itemTindakan.add(listDataRenungan[i]['Tindakan'].toString());
+            itemTagline.add(listDataRenungan[i]['Tagline'].toString());
+          }
+          listDataTemp = listDataRenungan ;
+        });
+      }
+    }
+  }
+
+  void deleteData(int indexdata) async {
+    setState(() {
+      listDataRenungan.removeAt(indexdata);
+      itemHighlight = [];
+      itemKitab = [];
+      itemSabda = [];
+      itemTindakan = [];
+      itemTagline = [];
+      for (int i = 0; i < listDataRenungan.length; i++) {
+        itemHighlight.add(listDataRenungan[i]['Highlight'].toString());
+        itemKitab.add(listDataRenungan[i]['Kitab'].toString());
+        itemSabda.add(listDataRenungan[i]['Sabda'].toString());
+        itemTindakan.add(listDataRenungan[i]['Tindakan'].toString());
+        itemTagline.add(listDataRenungan[i]['Tagline'].toString());
+      }
+    });
+
+    dataRenungan = '';
+    dataRenungan = dataRenungan + "[";
+    for (int i = 0; i < listDataRenungan.length; i++) {
+      dataRenungan = dataRenungan + "{";
+      dataRenungan = dataRenungan + '"Highlight":"' + listDataRenungan[i]['Highlight'].toString()
+                  + '","Kitab":"' + listDataRenungan[i]['Kitab'].toString()
+                  + '","Sabda":"' + listDataRenungan[i]['Sabda'].toString()
+                  + '","Tindakan":"' + listDataRenungan[i]['Tindakan'].toString()
+                  + '","Tagline":"' +listDataRenungan[i]['Tagline'].toString()
+                  + '"}';
+      if (listDataRenungan.length != 1 && i != listDataRenungan.length - 1) {
+          dataRenungan = dataRenungan + ',';
+        }
+    }
+    dataRenungan = dataRenungan + "]";
+
+    // write string to text file
+    String path = '/storage/emulated/0/Download/renunganpribadi.txt';
+    File(path).writeAsString(dataRenungan);
+  }
+  // END OF SERVICES
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +109,56 @@ class _ListRenunganState extends State<ListRenungan> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context, 
+              MaterialPageRoute(builder: (context) => HomePage())
+            );
           },
           icon: const Icon(Icons.arrow_back_rounded),
           color: const Color.fromARGB(255, 140, 101, 58)
         ),
-        title: Text("Kembali", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 140, 101, 58), fontWeight: FontWeight.bold)),),
       ),
       body: Container(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text("Renungan", style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 140, 101, 58))),),
+                const SizedBox(width: 20,),
               ],
             ),
             const SizedBox(height: 10,),
-            const TextField(
+            TextField(
+              onChanged: (searchText) {
+                searchText = searchText.toLowerCase();
+                setState(() {
+                  List listfordisplay = [];
+                  for (int i = 0; i < listDataTemp.length; i++) {
+                    String temptag = listDataTemp[i]["Tagline"];
+                    String temphighlight = listDataTemp[i]["Highlight"];
+                    if (temptag.contains(searchText) || temphighlight.contains(searchText)) {
+                      listfordisplay.add(listDataTemp[i]);
+                    }
+                  }
+                  listDataRenungan = [];
+                  listDataRenungan = listfordisplay;
+
+                  itemHighlight = [];
+                  itemKitab = [];
+                  itemSabda = [];
+                  itemTindakan = [];
+                  itemTagline = [];
+                  for (int i = 0; i < listDataRenungan.length; i++) {
+                    itemHighlight.add(listDataRenungan[i]['Highlight'].toString());
+                    itemKitab.add(listDataRenungan[i]['Kitab'].toString());
+                    itemSabda.add(listDataRenungan[i]['Sabda'].toString());
+                    itemTindakan.add(listDataRenungan[i]['Tindakan'].toString());
+                    itemTagline.add(listDataRenungan[i]['Tagline'].toString());
+                  }
+                });
+              },
               cursorColor: Color.fromARGB(255, 95, 95, 95),
               decoration: InputDecoration(
                 fillColor: Color.fromARGB(255, 253, 255, 252),
@@ -79,17 +192,63 @@ class _ListRenunganState extends State<ListRenungan> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(itemJudul[index], style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text('${itemHighlight[index]}', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),)
+                                ),
+                                PopupMenuButton(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(8))
+                                  ),
+                                  itemBuilder: (context) => [
+                                    PopupMenuItem(
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.create),
+                                          SizedBox(width: 5,),
+                                          Text("Edit"),
+                                        ],
+                                      ),
+                                      value: 1,
+                                    ),
+                                    PopupMenuItem(
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.auto_delete),
+                                          SizedBox(width: 5,),
+                                          Text("Delete"),
+                                        ],
+                                      ),
+                                      value: 2,
+                                    )
+                                  ],
+                                  onSelected: (value) {
+                                    if (value == 1) {
+                                      Navigator.push(
+                                        context, 
+                                        MaterialPageRoute(builder: (context) => RenunganPage(status: 'edit', index: index))
+                                      );
+                                    } else if (value == 2) {
+                                      deleteData(index);
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
                             const SizedBox(height: 5,),
-                            Text(itemKitab[index], style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w300,color: Color.fromARGB(255, 85, 48, 29))),),
+                            Text('${itemKitab[index]}', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w300,color: Color.fromARGB(255, 85, 48, 29))),),
+                            const SizedBox(height: 5,),
+                            Text('${itemTagline[index]}', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w300,color: Color.fromARGB(255, 85, 48, 29))),),
                             const SizedBox(height: 20,),
-                            Text(itemBody[index], style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
+                            Text('${itemSabda[index]}', style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 85, 48, 29))),),
                           ],
                         ),
                       ),
                     );    
                   },
-                  itemCount: itemJudul.length,
+                  itemCount: itemHighlight.length,
                 )
               ),
             ),
@@ -100,7 +259,7 @@ class _ListRenunganState extends State<ListRenungan> {
         onPressed: () {
           Navigator.push(
             context, 
-            MaterialPageRoute(builder: (context) => RenunganPage())
+            MaterialPageRoute(builder: (context) => RenunganPage(status: 'tambah', index: 0))
           );
         },
         backgroundColor: Color.fromARGB(255, 85, 48, 29),

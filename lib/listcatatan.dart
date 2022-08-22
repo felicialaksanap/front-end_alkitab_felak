@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -29,50 +28,66 @@ class _ListCatatanState extends State<ListCatatan> {
     // TODO: implement initState
     super.initState();
     readFile();
-    // readFile();
   }
+
 
   // SERVICES FILE JSON
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-    return directory.path;
-  }
+  // Future<String> get _localPath async {
+  //   final directory = await getApplicationDocumentsDirectory();
+  //   return directory.path;
+  // }
 
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('/storage/emulated/0/Download/catatanpribadi.txt');
-  }
+  // Future<File> get _localFile async {
+  //   final path = await _localPath;
+  //   return File('/storage/emulated/0/Download/catatanpribadi.txt');
+  // }
+  List listDataCat = []; // read and display
+  List listDataTemp = []; // temp
+  String dataCatatan = '';
   
-  List listDataCat = [];
   List<String> itemHighlight = [];
   List<String> itemKitab = [];
   List<String> itemCatatan = [];
   List<String> itemTagline = [];
 
   void readFile() async {
-    final file = await _localFile;
-    final contents = await file.readAsString();
-    setState(() {
-      // print("content : $contents");
+    String path = '/storage/emulated/0/Download/catatanpribadi.txt';
+    bool directoryExists = await Directory(path).exists();
+    bool fileExists = await File(path).exists();
+
+    if (directoryExists || fileExists) {
+      final contents = await File(path).readAsString();
+      listDataCat = [];
       if (contents.isNotEmpty) {
         listDataCat = json.decode(contents);
-        for (int i = 0; i < listDataCat.length; i++) {
-          itemHighlight.add(listDataCat[i]['Highlight'].toString());
-          itemKitab.add(listDataCat[i]['Kitab'].toString());
-          itemCatatan.add(listDataCat[i]['Catatan'].toString());
-          itemTagline.add(listDataCat[i]['Tagline'].toString());
-        }
+        setState(() {
+          for (int i = 0; i < listDataCat.length; i++) {
+            itemHighlight.add(listDataCat[i]['Highlight'].toString());
+            itemKitab.add(listDataCat[i]['Kitab'].toString());
+            itemCatatan.add(listDataCat[i]['Catatan'].toString());
+            itemTagline.add(listDataCat[i]['Tagline'].toString());
+          }
+          listDataTemp = listDataCat;
+        });
       }
-    });
+    }
   }
 
-  String dataCatatan = '';
-
-  Future<File> deleteData(int indexdata) async {
-    final file = await _localFile;
-    print("data lama: $listDataCat");
-    listDataCat.removeAt(indexdata);
-    print("data baru : $listDataCat");
+  void deleteData(int indexdata) async {
+    // final file = await _localFile;
+    setState(() {
+      listDataCat.removeAt(indexdata);
+      itemHighlight = [];
+      itemKitab = [];
+      itemCatatan = [];
+      itemTagline = [];
+      for (int i = 0; i < listDataCat.length; i++) {
+        itemHighlight.add(listDataCat[i]['Highlight'].toString());
+        itemKitab.add(listDataCat[i]['Kitab'].toString());
+        itemCatatan.add(listDataCat[i]['Catatan'].toString());
+        itemTagline.add(listDataCat[i]['Tagline'].toString());
+      }
+    });
 
     dataCatatan = dataCatatan + "[";
     for (int i = 0; i < listDataCat.length; i++) {
@@ -87,17 +102,10 @@ class _ListCatatanState extends State<ListCatatan> {
         }
     }
     dataCatatan = dataCatatan + "]";
-    print("data cat: $dataCatatan");
 
-    // for (int i = 0; i < listDataCat.length; i++) {
-    //   if (i != indexdata) {
-    //     // print("masuk");
-    //     dataCatBaru = listDataCat[i];
-    //   }
-    // }
-    // print("data baru : $dataCatBaru");    // listDataCat.removeAt(indexdata);
-    // print("data: $listDataCat");
-    return file.writeAsString(dataCatatan);
+    // write string to text file
+    String path = '/storage/emulated/0/Download/catatanpribadi.txt';
+    File(path).writeAsString(dataCatatan);
   }
   // END OF SERVICES
 
@@ -127,10 +135,39 @@ class _ListCatatanState extends State<ListCatatan> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text('Catatan', style: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 140, 101, 58))),),
+                const SizedBox(width: 20,),
               ],
             ),
             const SizedBox(height: 10,),
-            const TextField(
+            TextField(
+              onChanged: (searchText) {
+                searchText = searchText.toLowerCase();
+                setState(() {
+                  List listfordisplay = [];
+                  for (int i = 0; i < listDataTemp.length; i++) {
+                    String temptag = listDataTemp[i]["Tagline"];
+                    String temphighlight = listDataTemp[i]["Highlight"];
+                    if (temptag.contains(searchText) || temphighlight.contains(searchText)) {
+                      listfordisplay.add(listDataTemp[i]);
+                    }
+                  }
+                  // print("result: $listfordisplay");
+                  listDataCat = [];
+                  listDataCat = listfordisplay;
+
+                  itemHighlight = [];
+                  itemKitab = [];
+                  itemCatatan = [];
+                  itemTagline = [];
+                  for (int i = 0; i < listDataCat.length; i++) {
+                    itemHighlight.add(listDataCat[i]['Highlight'].toString());
+                    itemKitab.add(listDataCat[i]['Kitab'].toString());
+                    itemCatatan.add(listDataCat[i]['Catatan'].toString());
+                    itemTagline.add(listDataCat[i]['Tagline'].toString());
+                  }
+                  // listDataCat = listfordisplay;
+                });
+              },
               cursorColor: Color.fromARGB(255, 95, 95, 95),
               decoration: InputDecoration(
                 fillColor: Color.fromARGB(255, 253, 255, 252),
@@ -259,4 +296,5 @@ class _ListCatatanState extends State<ListCatatan> {
       ),
     );
   }
+
 }

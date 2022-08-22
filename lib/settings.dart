@@ -42,17 +42,20 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29))),
                   ),
                 ),
-                FlutterSwitch(
-                  width: 60.0,
-                  height: 30.0,
-                  inactiveColor: Colors.black,
-                  activeColor: Color.fromARGB(255, 0, 206, 77),
-                  value: status, 
-                  onToggle: (val) {
-                    setState(() {
-                      status = val;
-                    });
-                  }
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: FlutterSwitch(
+                    width: 60.0,
+                    height: 30.0,
+                    inactiveColor: Colors.black,
+                    activeColor: Color.fromARGB(255, 0, 206, 77),
+                    value: status, 
+                    onToggle: (val) {
+                      setState(() {
+                        status = val;
+                      });
+                    }
+                  ),
                 )
               ],
             ),
@@ -107,9 +110,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 "Font Size",
                 style: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29))),
               ),
-              trailing: Text(
-                ">",
-                style: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29))),
+              trailing: Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Text(
+                  ">",
+                  style: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, color: Color.fromARGB(255, 85, 48, 29))),
+                ),
               ),
             ),
             const SizedBox(height: 10,),
